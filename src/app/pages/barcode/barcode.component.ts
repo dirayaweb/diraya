@@ -35,12 +35,18 @@ export class BarcodeComponent implements OnInit, OnDestroy {
           },
         },
         decoder: {
-          // EAN and CODE128 are popular for typical products
           readers: [
-            'ean_reader',
+            // Standard 1D barcodes supported by default Quagga2
             'code_128_reader',
+            'ean_reader',
+            'ean_8_reader',
             'upc_reader',
             'upc_e_reader',
+            'codabar_reader',
+            'i2of5_reader',
+            '2of5_reader',
+            'code_39_reader',
+            'code_93_reader',
           ],
         },
       },
@@ -82,13 +88,18 @@ export class BarcodeComponent implements OnInit, OnDestroy {
       const data = await response.json();
       if (!data || data.status === 0) {
         this.productResult = `Product "${barcode}" not found.`;
+        // Reopen camera after "not found" message
+        setTimeout(() => {
+          this.productResult = '';
+          this.startCamera();
+        }, 2000);
       } else {
         const allergens = data.product?.allergens_tags || [];
         if (allergens.length) {
-          this.productResult = `Detected barcode: ${barcode}
+          this.productResult = `Detected code: ${barcode}
 Contains allergens: ${allergens.join(', ')}`;
         } else {
-          this.productResult = `Detected barcode: ${barcode}
+          this.productResult = `Detected code: ${barcode}
 No major allergens found.`;
         }
       }

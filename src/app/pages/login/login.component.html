@@ -2,13 +2,13 @@
   class="container d-flex flex-column align-items-center mt-5"
   style="max-width: 400px"
 >
-  <h2 class="mb-4">تسجيل الدخول</h2>
+  <h2 class="mb-4">Login</h2>
   <div class="mb-3 w-100">
-    <label class="form-label">البريد الإلكتروني</label>
+    <label class="form-label">Email</label>
     <input class="form-control" type="email" [(ngModel)]="email" />
   </div>
   <div class="mb-3 w-100">
-    <label class="form-label">كلمة المرور</label>
+    <label class="form-label">Password</label>
     <input class="form-control" type="password" [(ngModel)]="password" />
   </div>
   <div class="form-check align-self-start mb-3">
@@ -23,11 +23,11 @@
   <div *ngIf="errorMessage" class="alert alert-danger w-100">
     {{ errorMessage }}
   </div>
-  <button class="btn btn-primary w-100 mb-2" (click)="login()">دخول</button>
+  <button class="btn btn-primary w-100 mb-2" (click)="login()">Login</button>
   <button class="btn btn-outline-danger w-100 mb-3" (click)="googleLogin()">
     Continue with Google
   </button>
   <button class="btn btn-link w-100" routerLink="/register">
-    إنشاء حساب جديد
+    Create a new account
   </button>
 </div>

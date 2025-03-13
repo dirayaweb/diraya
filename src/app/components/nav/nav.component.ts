@@ -21,6 +21,8 @@ export class NavComponent implements OnInit {
       this.user = u;
       if (this.user?.photoURL) {
         this.avatarUrl = this.user.photoURL;
+      } else {
+        this.avatarUrl = 'https://avatar.iran.liara.run/public/76';
       }
     });
   }

@@ -1,10 +1,10 @@
 <div class="container text-center mt-5">
-  <h2>حساب المستخدم</h2>
-  <p>مرحباً {{ userName }}</p>
+  <h2>User Account</h2>
+  <p>Welcome, {{ userName }}</p>
 
   <div class="mt-3">
     <div *ngIf="userAllergies !== null">
-      <h5>حساسياتك:</h5>
+      <h5>Your Allergies:</h5>
       <ng-container
         *ngIf="userAllergies && userAllergies.length > 0; else noAllergies"
       >
@@ -15,12 +15,10 @@
         </ul>
       </ng-container>
       <ng-template #noAllergies>
-        <p>لا توجد بيانات حساسية محفوظة.</p>
+        <p>You have no saved allergies.</p>
       </ng-template>
     </div>
   </div>
 
-  <button class="btn btn-outline-danger mt-4" (click)="logout()">
-    تسجيل الخروج
-  </button>
+  <button class="btn btn-outline-danger mt-4" (click)="logout()">Logout</button>
 </div>

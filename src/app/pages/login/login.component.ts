@@ -14,7 +14,7 @@ import { RouterModule } from '@angular/router';
 export class LoginComponent {
   email = '';
   password = '';
-  rememberMe = false;
+  rememberMe = true; // Default to true so user doesn't have to log in each time
   errorMessage = '';
 
   constructor(private authService: AuthService, private router: Router) {}
@@ -28,7 +28,7 @@ export class LoginComponent {
           this.router.navigate(['/user']);
         },
         error: (err) => {
-          this.errorMessage = err.message || 'حدث خطأ أثناء تسجيل الدخول';
+          this.errorMessage = err.message || 'Error logging in';
         },
       });
   }
@@ -40,8 +40,7 @@ export class LoginComponent {
         this.router.navigate(['/user']);
       },
       error: (err) => {
-        this.errorMessage =
-          err.message || 'حدث خطأ أثناء تسجيل الدخول مع Google';
+        this.errorMessage = err.message || 'Error logging in with Google';
       },
     });
   }

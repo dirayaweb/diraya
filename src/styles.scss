@@ -1,1 +1,121 @@
-/* You can add global styles to this file, and also import other style files */
+/* Example theme variables and global styles */
+:root {
+  --color-primary: #2e4857; /* Main sidebar/nav background */
+  --color-secondary: #96b7c4;
+  --color-accent: #a4c3b2;
+  --color-background: #f2e9e4;
+  --color-text: #333333;
+  --font-family-base: "Open Sans", sans-serif;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-family-base);
+  background-color: var(--color-background);
+  color: var(--color-text);
+}
+
+/* Navbar / Offcanvas overrides for mobile sidebar look */
+.navbar {
+  background-color: var(--color-background) !important;
+}
+
+.offcanvas.offcanvas-end {
+  width: 250px;
+  background-color: var(--color-primary);
+  color: #ffffff;
+}
+
+.offcanvas-title {
+  color: #ffffff;
+}
+.offcanvas-body .nav-link,
+.offcanvas-body .navbar-brand {
+  color: #ffffff !important;
+}
+.offcanvas-body .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Hero Section (Home Page) */
+.hero-section {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  padding: 2rem 1rem;
+  background-color: var(--color-background);
+}
+
+.hero-text {
+  flex: 1 1 300px;
+  padding: 1rem;
+  text-align: left;
+}
+
+.hero-text h1 {
+  font-size: 2.2rem;
+  color: var(--color-primary);
+  margin-bottom: 0.5rem;
+}
+
+.hero-text h2 {
+  font-size: 1.5rem;
+  color: var(--color-secondary);
+  margin-bottom: 1rem;
+}
+
+.hero-text p {
+  margin-bottom: 1.5rem;
+  line-height: 1.4;
+}
+
+.hero-buttons button {
+  margin-right: 0.5rem;
+}
+
+.hero-image {
+  flex: 1 1 300px;
+  text-align: center;
+}
+
+.hero-image img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* How It Works */
+.how-it-works {
+  padding: 2rem 1rem;
+}
+
+.how-it-works h3 {
+  font-size: 1.8rem;
+  margin-bottom: 2rem;
+  color: var(--color-primary);
+}
+
+.steps {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.5rem;
+}
+
+.step {
+  text-align: center;
+  flex: 1 1 250px;
+  background: #fff;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.step img {
+  height: 64px;
+  margin-bottom: 1rem;
+}
+
+.step h4 {
+  margin-bottom: 0.5rem;
+  color: var(--color-primary);
+}
