@@ -1,0 +1,45 @@
+<div class="container text-center mt-5" style="max-width: 400px">
+  <h2 class="mb-4">Barcode Scanning</h2>
+
+  <div
+    id="interactive"
+    class="viewport"
+    style="width: 100%; max-width: 300px; margin: auto"
+  >
+    <!-- Quagga will place a video and canvas here -->
+  </div>
+
+  <div class="mt-3">
+    <button
+      class="btn btn-primary me-2"
+      (click)="startCamera()"
+      [disabled]="isCameraActive"
+    >
+      Open Camera
+    </button>
+    <button
+      class="btn btn-secondary"
+      (click)="stopCamera()"
+      [disabled]="!isCameraActive"
+    >
+      Stop Camera
+    </button>
+  </div>
+
+  <div class="mt-3" *ngIf="isLoading">
+    <div class="spinner-border text-primary" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+
+  <div *ngIf="errorMsg" class="alert alert-danger w-100 mt-3">
+    {{ errorMsg }}
+  </div>
+  <div
+    *ngIf="productResult"
+    class="alert alert-info w-100 mt-3"
+    style="white-space: pre-line"
+  >
+    {{ productResult }}
+  </div>
+</div>

@@ -1,0 +1,62 @@
+<div
+  class="container d-flex flex-column align-items-center mt-5"
+  style="max-width: 400px"
+>
+  <h2 class="mb-4" *ngIf="!step2Google">إنشاء حساب جديد</h2>
+  <h2 class="mb-4" *ngIf="step2Google">اختر مسببات الحساسية (Google)</h2>
+
+  <!-- Normal Register Flow -->
+  <ng-container *ngIf="!step2Google">
+    <div class="mb-3 w-100">
+      <label class="form-label">اسم المستخدم</label>
+      <input class="form-control" type="text" [(ngModel)]="username" />
+    </div>
+    <div class="mb-3 w-100">
+      <label class="form-label">البريد الإلكتروني</label>
+      <input class="form-control" type="email" [(ngModel)]="email" />
+    </div>
+    <div class="mb-3 w-100">
+      <label class="form-label">كلمة المرور</label>
+      <input class="form-control" type="password" [(ngModel)]="password" />
+    </div>
+    <div class="mb-3 w-100">
+      <label class="form-label">مسببات الحساسية</label>
+      <select multiple class="form-select" [(ngModel)]="selectedAllergies">
+        <option *ngFor="let allergy of allergies" [value]="allergy">
+          {{ allergy }}
+        </option>
+      </select>
+    </div>
+    <div *ngIf="errorMessage" class="alert alert-danger w-100">
+      {{ errorMessage }}
+    </div>
+    <button class="btn btn-primary w-100 mb-2" (click)="register()">
+      تسجيل
+    </button>
+    <button
+      class="btn btn-outline-danger w-100 mb-3"
+      (click)="googleRegister()"
+    >
+      Continue with Google
+    </button>
+    <button class="btn btn-link w-100" routerLink="/login">تسجيل الدخول</button>
+  </ng-container>
+
+  <!-- Step 2: Google-based allergies selection only -->
+  <ng-container *ngIf="step2Google">
+    <div class="mb-3 w-100">
+      <label class="form-label">مسببات الحساسية</label>
+      <select multiple class="form-select" [(ngModel)]="selectedAllergies">
+        <option *ngFor="let allergy of allergies" [value]="allergy">
+          {{ allergy }}
+        </option>
+      </select>
+    </div>
+    <div *ngIf="errorMessage" class="alert alert-danger w-100">
+      {{ errorMessage }}
+    </div>
+    <button class="btn btn-primary w-100 mb-2" (click)="saveGoogleAllergies()">
+      حفظ
+    </button>
+  </ng-container>
+</div>

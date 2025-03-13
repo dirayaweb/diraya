@@ -1,0 +1,26 @@
+<div class="container text-center mt-5">
+  <h2>حساب المستخدم</h2>
+  <p>مرحباً {{ userName }}</p>
+
+  <div class="mt-3">
+    <div *ngIf="userAllergies !== null">
+      <h5>حساسياتك:</h5>
+      <ng-container
+        *ngIf="userAllergies && userAllergies.length > 0; else noAllergies"
+      >
+        <ul class="list-group mx-auto" style="max-width: 200px">
+          <li class="list-group-item" *ngFor="let allergy of userAllergies">
+            {{ allergy }}
+          </li>
+        </ul>
+      </ng-container>
+      <ng-template #noAllergies>
+        <p>لا توجد بيانات حساسية محفوظة.</p>
+      </ng-template>
+    </div>
+  </div>
+
+  <button class="btn btn-outline-danger mt-4" (click)="logout()">
+    تسجيل الخروج
+  </button>
+</div>

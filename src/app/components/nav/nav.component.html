@@ -1,0 +1,79 @@
+<nav class="navbar navbar-expand-lg bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" routerLink="/">Diraya</a>
+
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="offcanvas"
+      data-bs-target="#offcanvasNavbar"
+      aria-controls="offcanvasNavbar"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Right side (desktop & mobile) -->
+    <div class="d-flex align-items-center ms-auto">
+      <div *ngIf="!user; else loggedIn">
+        <a class="btn btn-primary" routerLink="/login">Login / Register</a>
+      </div>
+      <ng-template #loggedIn>
+        <div
+          class="d-flex align-items-center"
+          style="cursor: pointer"
+          (click)="goToUserPage()"
+        >
+          <img
+            [src]="avatarUrl"
+            alt="Avatar"
+            class="rounded-circle me-2"
+            style="width: 40px; height: 40px; object-fit: cover"
+          />
+          <span>{{ user?.displayName || user?.email }}</span>
+        </div>
+      </ng-template>
+    </div>
+
+    <!-- Offcanvas for nav links -->
+    <div
+      class="offcanvas offcanvas-end"
+      tabindex="-1"
+      id="offcanvasNavbar"
+      aria-labelledby="offcanvasNavbarLabel"
+    >
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Diraya</h5>
+        <button
+          type="button"
+          class="btn-close text-reset"
+          data-bs-dismiss="offcanvas"
+          aria-label="Close"
+        ></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="navbar-nav mb-2 mb-lg-0">
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/" data-bs-dismiss="offcanvas"
+              >Home</a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" routerLink="/about" data-bs-dismiss="offcanvas"
+              >About us</a
+            >
+          </li>
+          <li class="nav-item" *ngIf="user">
+            <a
+              class="nav-link"
+              routerLink="/barcode"
+              data-bs-dismiss="offcanvas"
+            >
+              Barcode Scanning
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
