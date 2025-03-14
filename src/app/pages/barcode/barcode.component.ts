@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { BarcodeFormat } from '@zxing/library';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-barcode',
   standalone: true,
-  imports: [CommonModule, ZXingScannerModule],
+  imports: [CommonModule, ZXingScannerModule, HttpClientModule],
   templateUrl: './barcode.component.html',
 })
 export class BarcodeComponent {
@@ -19,7 +20,7 @@ export class BarcodeComponent {
   // Instead of a deviceId (string), we store the selected device as a MediaDeviceInfo
   selectedDevice: MediaDeviceInfo | undefined = undefined;
 
-  // Allowed barcode formats – you can adjust these as needed
+  // Allowed barcode formats – adjust these as needed
   allowedFormats = [
     BarcodeFormat.QR_CODE,
     BarcodeFormat.CODE_128,
@@ -28,6 +29,8 @@ export class BarcodeComponent {
     BarcodeFormat.UPC_A,
     BarcodeFormat.UPC_E,
   ];
+
+  constructor(private http: HttpClient) {}
 
   startCamera(): void {
     this.isCameraActive = true;
@@ -41,6 +44,8 @@ export class BarcodeComponent {
 
   onScanSuccess(decodedText: string): void {
     console.log('Scan success:', decodedText);
+    // Call the Open Food Facts API to fetch product details
+    this.fetchProductData(decodedText);
     // Optionally stop the camera after a successful scan
     setTimeout(() => {
       this.scannedResult = decodedText;
@@ -49,7 +54,7 @@ export class BarcodeComponent {
   }
 
   onScanFailure(error: any): void {
-    // Log failures for debugging (these occur often when no code is detected)
+    // Log scan failures for debugging (often occurs when no code is detected)
     console.debug('Scan failure:', error);
   }
 
@@ -74,5 +79,19 @@ export class BarcodeComponent {
     this.selectedDevice = this.availableDevices.find(
       (device) => device.deviceId === selectedId
     );
+  }
+
+  // Call the Open Food Facts API using the scanned barcode
+  fetchProductData(barcode: string): void {
+    const url = `https://world.openfoodfacts.org/api/v0/product/${barcode}.json`;
+    this.http.get(url).subscribe({
+      next: (data) => {
+        console.log('Product data:', data);
+        // Optionally, you can process and display product info here.
+      },
+      error: (error) => {
+        console.error('Error fetching product data:', error);
+      },
+    });
   }
 }

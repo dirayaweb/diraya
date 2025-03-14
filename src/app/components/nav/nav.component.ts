@@ -4,6 +4,8 @@ import { RouterModule, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { User } from '@angular/fire/auth';
 
+declare var bootstrap: any;
+
 @Component({
   selector: 'app-nav',
   standalone: true,
@@ -29,5 +31,17 @@ export class NavComponent implements OnInit {
 
   goToUserPage() {
     this.router.navigate(['/user']);
+  }
+
+  dismissOffcanvas(): void {
+    const offcanvasElement = document.getElementById('offcanvasNavbar');
+    if (offcanvasElement) {
+      const bsOffcanvas = bootstrap.Offcanvas.getInstance(offcanvasElement);
+      if (bsOffcanvas) {
+        bsOffcanvas.hide();
+      } else {
+        new bootstrap.Offcanvas(offcanvasElement).hide();
+      }
+    }
   }
 }
