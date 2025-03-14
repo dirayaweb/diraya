@@ -23,8 +23,17 @@
   <div *ngIf="errorMessage" class="alert alert-danger w-100">
     {{ errorMessage }}
   </div>
-  <button class="btn btn-primary w-100 mb-2" (click)="login()">Login</button>
-  <button class="btn btn-outline-danger w-100 mb-3" (click)="googleLogin()">
+  <button class="btn btn-dark w-100 mb-2" (click)="login()">Login</button>
+  <button
+    class="btn d-flex align-items-center justify-content-center border w-100 mb-3"
+    style="background-color: #fff; color: #000"
+    (click)="googleLogin()"
+  >
+    <img
+      src="https://developers.google.com/identity/images/g-logo.png"
+      alt="Google Logo"
+      style="width: 20px; margin-right: 8px"
+    />
     Continue with Google
   </button>
   <button class="btn btn-link w-100" routerLink="/register">

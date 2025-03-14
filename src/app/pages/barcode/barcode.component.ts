@@ -14,13 +14,8 @@ export class BarcodeComponent {
   isCameraActive = false;
   scannedResult = '';
   errorMsg = '';
-
-  // List of available devices
   availableDevices: MediaDeviceInfo[] = [];
-  // Instead of a deviceId (string), we store the selected device as a MediaDeviceInfo
-  selectedDevice: MediaDeviceInfo | undefined = undefined;
-
-  // Allowed barcode formats – adjust these as needed
+  selectedDevice: MediaDeviceInfo | undefined;
   allowedFormats = [
     BarcodeFormat.QR_CODE,
     BarcodeFormat.CODE_128,
@@ -29,6 +24,7 @@ export class BarcodeComponent {
     BarcodeFormat.UPC_A,
     BarcodeFormat.UPC_E,
   ];
+  resultStatus: 'safe' | 'unsafe' | 'notfound' | null = null;
 
   constructor(private http: HttpClient) {}
 
@@ -36,6 +32,7 @@ export class BarcodeComponent {
     this.isCameraActive = true;
     this.scannedResult = '';
     this.errorMsg = '';
+    this.resultStatus = null;
   }
 
   stopCamera(): void {
@@ -43,26 +40,20 @@ export class BarcodeComponent {
   }
 
   onScanSuccess(decodedText: string): void {
-    console.log('Scan success:', decodedText);
-    // Call the Open Food Facts API to fetch product details
+    this.scannedResult = decodedText;
     this.fetchProductData(decodedText);
-    // Optionally stop the camera after a successful scan
     setTimeout(() => {
-      this.scannedResult = decodedText;
       this.stopCamera();
     }, 300);
   }
 
   onScanFailure(error: any): void {
-    // Log scan failures for debugging (often occurs when no code is detected)
     console.debug('Scan failure:', error);
   }
 
   onCamerasFound(devices: MediaDeviceInfo[]): void {
     this.availableDevices = devices;
-    console.log('Cameras found:', devices);
     if (devices && devices.length) {
-      // Auto-select a "rear" camera if available
       const rearCamera = devices.find((d) =>
         /back|rear|environment/i.test(d.label)
       );
@@ -75,22 +66,30 @@ export class BarcodeComponent {
   onDeviceSelect(event: Event): void {
     const selectEl = event.target as HTMLSelectElement;
     const selectedId = selectEl.value;
-    // Find the MediaDeviceInfo object by matching the deviceId
     this.selectedDevice = this.availableDevices.find(
       (device) => device.deviceId === selectedId
     );
   }
 
-  // Call the Open Food Facts API using the scanned barcode
   fetchProductData(barcode: string): void {
     const url = `https://world.openfoodfacts.org/api/v0/product/${barcode}.json`;
     this.http.get(url).subscribe({
-      next: (data) => {
-        console.log('Product data:', data);
-        // Optionally, you can process and display product info here.
+      next: (data: any) => {
+        if (!data || data.status === 0 || !data.product) {
+          this.resultStatus = 'notfound';
+          return;
+        }
+        if (
+          data.product.allergens_tags &&
+          data.product.allergens_tags.length > 0
+        ) {
+          this.resultStatus = 'unsafe';
+        } else {
+          this.resultStatus = 'safe';
+        }
       },
-      error: (error) => {
-        console.error('Error fetching product data:', error);
+      error: () => {
+        this.resultStatus = 'notfound';
       },
     });
   }

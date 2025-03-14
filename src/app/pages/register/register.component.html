@@ -2,61 +2,42 @@
   class="container d-flex flex-column align-items-center mt-5"
   style="max-width: 400px"
 >
-  <h2 class="mb-4" *ngIf="!step2Google">Create a New Account</h2>
-  <h2 class="mb-4" *ngIf="step2Google">Select Your Allergies (Google)</h2>
-
-  <!-- Normal Register Flow -->
-  <ng-container *ngIf="!step2Google">
-    <div class="mb-3 w-100">
-      <label class="form-label">Username</label>
-      <input class="form-control" type="text" [(ngModel)]="username" />
-    </div>
-    <div class="mb-3 w-100">
-      <label class="form-label">Email</label>
-      <input class="form-control" type="email" [(ngModel)]="email" />
-    </div>
-    <div class="mb-3 w-100">
-      <label class="form-label">Password</label>
-      <input class="form-control" type="password" [(ngModel)]="password" />
-    </div>
-    <div class="mb-3 w-100">
-      <label class="form-label">Allergies</label>
-      <select multiple class="form-select" [(ngModel)]="selectedAllergies">
-        <option *ngFor="let allergy of allergies" [value]="allergy">
-          {{ allergy }}
-        </option>
-      </select>
-    </div>
-    <div *ngIf="errorMessage" class="alert alert-danger w-100">
-      {{ errorMessage }}
-    </div>
-    <button class="btn btn-primary w-100 mb-2" (click)="register()">
-      Register
-    </button>
-    <button
-      class="btn btn-outline-danger w-100 mb-3"
-      (click)="googleRegister()"
-    >
-      Continue with Google
-    </button>
-    <button class="btn btn-link w-100" routerLink="/login">Login</button>
-  </ng-container>
-
-  <!-- Step 2: Google-based allergies selection only -->
-  <ng-container *ngIf="step2Google">
-    <div class="mb-3 w-100">
-      <label class="form-label">Allergies</label>
-      <select multiple class="form-select" [(ngModel)]="selectedAllergies">
-        <option *ngFor="let allergy of allergies" [value]="allergy">
-          {{ allergy }}
-        </option>
-      </select>
-    </div>
-    <div *ngIf="errorMessage" class="alert alert-danger w-100">
-      {{ errorMessage }}
-    </div>
-    <button class="btn btn-primary w-100 mb-2" (click)="saveGoogleAllergies()">
-      Save
-    </button>
-  </ng-container>
+  <h2 class="mb-4">Create a New Account</h2>
+  <div class="mb-3 w-100">
+    <label class="form-label">Username</label>
+    <input class="form-control" type="text" [(ngModel)]="username" />
+  </div>
+  <div class="mb-3 w-100">
+    <label class="form-label">Email</label>
+    <input class="form-control" type="email" [(ngModel)]="email" />
+  </div>
+  <div class="mb-3 w-100">
+    <label class="form-label">Password</label>
+    <input class="form-control" type="password" [(ngModel)]="password" />
+  </div>
+  <div class="mb-3 w-100">
+    <label class="form-label">Allergies</label>
+    <select multiple class="form-select" [(ngModel)]="selectedAllergies">
+      <option *ngFor="let allergy of allergies" [value]="allergy">
+        {{ allergy }}
+      </option>
+    </select>
+  </div>
+  <div *ngIf="errorMessage" class="alert alert-danger w-100">
+    {{ errorMessage }}
+  </div>
+  <button class="btn btn-dark w-100 mb-2" (click)="register()">Register</button>
+  <button
+    class="btn d-flex align-items-center justify-content-center border w-100 mb-3"
+    style="background-color: #fff; color: #000"
+    (click)="googleRegister()"
+  >
+    <img
+      src="https://developers.google.com/identity/images/g-logo.png"
+      alt="Google Logo"
+      style="width: 20px; margin-right: 8px"
+    />
+    Continue with Google
+  </button>
+  <button class="btn btn-link w-100" routerLink="/login">Login</button>
 </div>

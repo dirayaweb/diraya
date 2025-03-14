@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { User } from '@angular/fire/auth';
-
 declare var bootstrap: any;
 
 @Component({
@@ -33,15 +32,14 @@ export class NavComponent implements OnInit {
     this.router.navigate(['/user']);
   }
 
-  dismissOffcanvas(): void {
+  dismissOffcanvas() {
     const offcanvasElement = document.getElementById('offcanvasNavbar');
     if (offcanvasElement) {
-      const bsOffcanvas = bootstrap.Offcanvas.getInstance(offcanvasElement);
-      if (bsOffcanvas) {
-        bsOffcanvas.hide();
-      } else {
-        new bootstrap.Offcanvas(offcanvasElement).hide();
+      let bsOffcanvas = bootstrap.Offcanvas.getInstance(offcanvasElement);
+      if (!bsOffcanvas) {
+        bsOffcanvas = new bootstrap.Offcanvas(offcanvasElement);
       }
+      bsOffcanvas.hide();
     }
   }
 }
