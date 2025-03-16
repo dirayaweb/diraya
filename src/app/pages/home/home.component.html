@@ -1,47 +1,110 @@
-<!-- A sample hero layout based on the provided mobile/desktop design -->
 <main class="hero-section">
-  <div class="hero-text">
-    <h1>Welcome to Diraya</h1>
-    <h2>Your Personal Food Safety Companion</h2>
-    <p>
-      Discover a smarter way to shop with confidence! Simply scan product
-      barcodes to instantly check for allergens and make informed food choices.
-    </p>
-    <div class="hero-buttons">
-      <button routerLink="/about" class="btn btn-outline-primary">
-        Learn More
-      </button>
-      <button routerLink="/barcode" class="btn btn-primary">Scan Now</button>
+  <!-- Five larger, rounded shapes on the left side -->
+  <div class="vertical-rects">
+    <div class="rect"></div>
+    <div class="rect"></div>
+    <div class="rect"></div>
+    <div class="rect"></div>
+    <div class="rect"></div>
+  </div>
+
+  <div class="hero-content container">
+    <div class="hero-text">
+      <h1>Welcome to Diraya</h1>
+      <h2>Your Personal Food Safety Companion</h2>
+      <p>
+        Discover a smarter way to shop with confidence! Simply scan product
+        barcodes to instantly check for allergens and make informed food
+        choices.
+      </p>
+      <div class="hero-buttons">
+        <!-- Scroll to how-it-works -->
+        <a href="#how-it-works" class="btn learn-more-btn">Learn More</a>
+        <button routerLink="/barcode" class="btn scan-now-btn">Scan Now</button>
+      </div>
+    </div>
+    <div class="hero-image">
+      <!-- Main illustration -->
+      <img
+        class="main-illustration"
+        src="assets/hero-woman.png"
+        alt="Food Scanning Illustration"
+      />
     </div>
   </div>
-  <div class="hero-image">
-    <img src="assets/hero-image.png" alt="Food Scanning Illustration" />
+
+  <!-- shape-right bridging the boundary between hero and how-it-works -->
+  <div class="shape-right">
+    <img src="assets/shape-right.png" alt="Divider shape" />
   </div>
 </main>
 
-<section class="how-it-works container">
-  <h3>How It Works</h3>
-  <div class="steps">
-    <div class="step">
-      <img src="assets/scan-icon.png" alt="Scan icon" />
-      <h4>1. Scan the Barcode</h4>
-      <p>Open your camera and scan the barcode on any food product.</p>
+<!-- How It Works Section -->
+<section id="how-it-works" class="how-it-works">
+  <!-- Optional bottom-left shape -->
+  <img class="shape-btm-lft" src="assets/shape-btm-lft.png" alt="" />
+
+  <div class="container">
+    <div class="how-it-works-header">
+      <h2>How It Works</h2>
     </div>
-    <div class="step">
-      <img src="assets/results-icon.png" alt="Results icon" />
-      <h4>2. Get Instant Results</h4>
-      <p>
-        The app will analyze the product and check for allergens based on your
-        preferences.
-      </p>
+
+    <div class="steps">
+      <!-- Step 1 -->
+      <div class="step-row">
+        <img src="assets/scan-icon.png" alt="Scan icon" />
+        <div>
+          <h4>1. Scan the Barcode</h4>
+          <p>Open your camera and scan the barcode on any food product.</p>
+        </div>
+      </div>
+      <div class="step-underline"></div>
+
+      <!-- Step 2 -->
+      <div class="step-row">
+        <img src="assets/results-icon.png" alt="Results icon" />
+        <div>
+          <h4>2. Get Instant Results</h4>
+          <p>
+            The app will analyze the product and check for allergens based on
+            your preferences.
+          </p>
+        </div>
+      </div>
+      <div class="step-underline"></div>
+
+      <!-- Step 3 -->
+      <div class="step-row">
+        <img src="assets/shop-icon.png" alt="Shop icon" />
+        <div>
+          <h4>3. Stay Safe &amp; Shop Smart</h4>
+          <p>
+            If it's safe, you're good to go! If not, you'll get a warning with
+            allergen details.
+          </p>
+        </div>
+      </div>
+      <div class="step-underline"></div>
     </div>
-    <div class="step">
-      <img src="assets/shop-icon.png" alt="Shop icon" />
-      <h4>3. Stay Safe &amp; Shop Smart</h4>
-      <p>
-        If it's safe, you're good to go! If not, you'll get a warning with
-        allergen details.
-      </p>
+  </div>
+</section>
+
+<!-- Key Features Section -->
+<section class="key-features">
+  <div class="container">
+    <div class="features-header">
+      <h2>Key Features</h2>
     </div>
+    <ul class="feature-list">
+      <li>✅ Instant Barcode Scanning – Get real-time allergen detection.</li>
+      <li>
+        ✅ Personalized Alerts – Set your allergens and get customized warnings.
+      </li>
+      <li>
+        ✅ Community Contribution – Help improve the database by adding missing
+        products.
+      </li>
+      <li>✅ Safe &amp; Reliable – Powered by verified food data sources.</li>
+    </ul>
   </div>
 </section>
