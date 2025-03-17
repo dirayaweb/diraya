@@ -52,10 +52,8 @@ export class RegisterComponent {
 
   googleRegister() {
     this.errorMessage = '';
-    // Sign in with Google as "register" flow
     this.authService.googleSignIn(true).subscribe({
       next: () => {
-        // Now user is signed in with Google, optionally show allergies selection
         this.step2Google = true;
       },
       error: (err) => {
@@ -65,7 +63,6 @@ export class RegisterComponent {
   }
 
   saveGoogleAllergies() {
-    this.errorMessage = '';
     const user = this.authService.getCurrentUser();
     if (!user) {
       this.errorMessage = 'لا يوجد مستخدم مسجل.';
