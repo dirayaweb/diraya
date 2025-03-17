@@ -1,37 +1,39 @@
-<!-- login.component.html -->
 <div class="login-page">
+  <!-- Center "Sign in" text on entire page, not just the form -->
+  <h1 class="login-title text-center">Sign in</h1>
+
   <div class="login-content container">
-    <!-- Left column: illustration (hidden on small screens) -->
+    <!-- Show illustration on left or top, matching your previous design. 
+         We'll keep the .d-none d-md-flex if you want it hidden on mobile. -->
     <div class="login-illustration d-none d-md-flex">
-      <!-- Adjust asset name/path if needed -->
       <img src="assets/login-illustration.png" alt="Sign In Illustration" />
     </div>
 
-    <!-- Right column: sign-in form -->
     <div class="login-form">
-      <h1 class="signin-title">Sign in</h1>
-
+      <!-- placeholders in green, no separate label -->
       <div class="mb-3">
-        <label class="form-label">Email</label>
-        <input class="form-control" type="email" [(ngModel)]="email" />
+        <input
+          class="form-control placeholder-green"
+          type="email"
+          placeholder="Email"
+          [(ngModel)]="email"
+        />
       </div>
 
-      <div class="mb-3">
-        <label class="form-label">Password</label>
-        <div class="position-relative">
-          <input
-            class="form-control"
-            [type]="showPassword ? 'text' : 'password'"
-            [(ngModel)]="password"
-          />
-          <span
-            class="material-icons toggle-password"
-            (click)="showPassword = !showPassword"
-            [attr.aria-label]="'Toggle password visibility'"
-          >
-            {{ showPassword ? 'visibility_off' : 'visibility' }}
-          </span>
-        </div>
+      <div class="mb-3 position-relative">
+        <input
+          class="form-control placeholder-green"
+          [type]="showPassword ? 'text' : 'password'"
+          placeholder="Password"
+          [(ngModel)]="password"
+        />
+        <span
+          class="material-icons toggle-password"
+          (click)="showPassword = !showPassword"
+          [attr.aria-label]="'Toggle password visibility'"
+        >
+          {{ showPassword ? "visibility_off" : "visibility" }}
+        </span>
       </div>
 
       <div class="form-check mb-3">
@@ -61,7 +63,10 @@
         </span>
       </div>
 
-      <hr class="mb-3" />
+      <!-- Separator with "or" in center -->
+      <div class="separator mb-3">
+        <span>or</span>
+      </div>
 
       <button
         class="btn btn-google-auth w-100 mb-3 d-flex align-items-center justify-content-center"

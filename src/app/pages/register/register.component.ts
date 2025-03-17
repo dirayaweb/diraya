@@ -34,7 +34,12 @@ export class RegisterComponent {
   register() {
     this.errorMessage = '';
     this.authService
-      .register(this.email, this.password, this.username, this.selectedAllergies)
+      .register(
+        this.email,
+        this.password,
+        this.username,
+        this.selectedAllergies
+      )
       .subscribe({
         next: () => {
           this.router.navigate(['/user']);

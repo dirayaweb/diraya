@@ -1,95 +1,108 @@
-<div class="container text-center mt-5" style="max-width: 400px; margin: auto">
-  <h2 class="mb-4">Barcode / QR Scanner</h2>
-
-  <div class="mb-3">
-    <button
-      class="btn btn-primary me-2"
-      (click)="startCamera()"
-      [disabled]="isCameraActive"
-    >
-      Start Camera
-    </button>
-    <button
-      class="btn btn-secondary"
-      (click)="stopCamera()"
-      [disabled]="!isCameraActive"
-    >
-      Stop Camera
-    </button>
-  </div>
-
-  <div class="mb-3" *ngIf="isCameraActive && availableDevices.length > 1">
-    <label for="cameraSelect" class="form-label">Select Camera:</label>
-    <select
-      id="cameraSelect"
-      class="form-select"
-      (change)="onDeviceSelect($event)"
-      [value]="selectedDevice?.deviceId"
-    >
-      <option *ngFor="let device of availableDevices" [value]="device.deviceId">
-        {{ device.label || device.deviceId }}
-      </option>
-    </select>
-  </div>
-
-  <zxing-scanner
-    *ngIf="isCameraActive"
-    [device]="selectedDevice"
-    [formats]="allowedFormats"
-    (camerasFound)="onCamerasFound($event)"
-    (scanSuccess)="onScanSuccess($event)"
-    (scanFailure)="onScanFailure($event)"
-    style="display: block; margin: 20px auto; width: 100%; max-width: 350px"
-  >
-  </zxing-scanner>
-
-  <div
-    class="alert alert-info w-100 mt-3"
-    style="white-space: pre-line"
-    *ngIf="scannedResult"
-  >
-    Scanned Code: {{ scannedResult }}
-  </div>
-
-  <div
-    *ngIf="resultStatus"
-    class="result-container mt-4 text-center"
-    style="max-width: 400px; margin: auto"
-  >
-    <h3>Result</h3>
-
-    <div *ngIf="resultStatus === 'safe'" class="card my-3 p-3">
-      <img
-        src="assets/safe.png"
-        alt="Safe Product"
-        style="width: 60px; margin: auto"
-      />
-      <h4>Safe Product</h4>
-      <p>This product does not contain allergens.</p>
+<!-- barcode.component.html -->
+<div class="barcode-page">
+  <div class="barcode-container">
+    <!-- White rounded top bar -->
+    <div class="barcode-header">
+      <h2>Barcode Scanning</h2>
     </div>
 
-    <div *ngIf="resultStatus === 'unsafe'" class="card my-3 p-3">
-      <img
-        src="assets/unsafe.png"
-        alt="Unsafe Product"
-        style="width: 60px; margin: auto"
-      />
-      <h4>Unsafe Product</h4>
-      <p>This product contains allergens.</p>
+    <!-- The scanning area & "Scan Now" button -->
+    <div class="scanner-area">
+      <!-- The "Scan Now" button (renamed from "Start Camera") -->
+      <button
+        class="btn btn-primary scan-btn"
+        (click)="startCamera()"
+        [disabled]="isCameraActive"
+      >
+        Scan Now
+      </button>
     </div>
 
-    <div *ngIf="resultStatus === 'notfound'" class="card my-3 p-3">
-      <img
-        src="assets/not-found.png"
-        alt="Product Not Found"
-        style="width: 60px; margin: auto"
-      />
-      <h4>Product Not Found</h4>
-      <p>Help us improve by adding this product to Open Food Facts.</p>
+    <!-- If multiple cameras are found, show camera select -->
+    <div
+      class="mb-3 text-center"
+      *ngIf="isCameraActive && availableDevices.length > 1"
+    >
+      <label for="cameraSelect" class="form-label">Select Camera:</label>
+      <select
+        id="cameraSelect"
+        class="form-select w-50 mx-auto"
+        (change)="onDeviceSelect($event)"
+        [value]="selectedDevice?.deviceId"
+      >
+        <option
+          *ngFor="let device of availableDevices"
+          [value]="device.deviceId"
+        >
+          {{ device.label || device.deviceId }}
+        </option>
+      </select>
     </div>
-  </div>
 
-  <div class="alert alert-danger w-100 mt-3" *ngIf="errorMsg">
-    {{ errorMsg }}
+    <!-- The actual camera preview -->
+    <div class="text-center" *ngIf="isCameraActive">
+      <zxing-scanner
+        [device]="selectedDevice"
+        [formats]="allowedFormats"
+        (camerasFound)="onCamerasFound($event)"
+        (scanSuccess)="onScanSuccess($event)"
+        (scanFailure)="onScanFailure($event)"
+        style="display: block; margin: 20px auto; width: 100%; max-width: 350px"
+      >
+      </zxing-scanner>
+    </div>
+
+    <!-- We do NOT display the scanned code anymore if you wish 
+         to hide it, otherwise leave it commented out:
+    <div
+      class="alert alert-info w-100 mt-3"
+      style="white-space: pre-line"
+      *ngIf="scannedResult"
+    >
+      Scanned Code: {{ scannedResult }}
+    </div>
+    -->
+
+    <!-- Show final result -->
+    <div
+      *ngIf="resultStatus"
+      class="result-container mt-4 text-center"
+      style="max-width: 400px; margin: auto"
+    >
+      <div *ngIf="resultStatus === 'safe'" class="card my-3 p-3">
+        <img
+          src="assets/safe.png"
+          alt="Safe Product"
+          style="width: 60px; margin: auto"
+        />
+        <h4>Safe Product</h4>
+        <p>This product does not contain allergens.</p>
+      </div>
+
+      <div *ngIf="resultStatus === 'unsafe'" class="card my-3 p-3">
+        <img
+          src="assets/unsafe.png"
+          alt="Unsafe Product"
+          style="width: 60px; margin: auto"
+        />
+        <h4>Unsafe Product</h4>
+        <p>This product contains allergens.</p>
+      </div>
+
+      <div *ngIf="resultStatus === 'notfound'" class="card my-3 p-3">
+        <img
+          src="assets/not-found.png"
+          alt="Product Not Found"
+          style="width: 60px; margin: auto"
+        />
+        <h4>Product Not Found</h4>
+        <p>Help us improve by adding this product to Open Food Facts.</p>
+      </div>
+    </div>
+
+    <!-- Errors (camera not accessible, etc.) -->
+    <div class="alert alert-danger w-100 mt-3 text-center" *ngIf="errorMsg">
+      {{ errorMsg }}
+    </div>
   </div>
 </div>

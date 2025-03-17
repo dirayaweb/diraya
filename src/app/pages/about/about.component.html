@@ -1,22 +1,15 @@
-<!-- about.component.html -->
-<div class="container text-center mt-5">
-  <h2>About Us</h2>
-  <p>This page includes information about our website and team.</p>
-</div>
-
-<!-- Duplicate How It Works + Key Features from Home -->
+<!-- We remove the "About Us" and subtitle. We replicate the same
+     How It Works + Key Features from Home. -->
 
 <section class="how-it-works">
-  <!-- shape-btm-lft can be re-used if you want the same shape here -->
   <img class="shape-btm-lft" src="assets/shape-btm-lft.png" alt="" />
 
   <div class="container">
     <div class="how-it-works-header">
-      <h2>How It Works</h2>
+      <span>How It Works</span>
     </div>
 
     <div class="steps">
-      <!-- Step 1 -->
       <div class="step-row">
         <img src="assets/scan-icon.png" alt="Scan icon" />
         <div>
@@ -26,20 +19,18 @@
       </div>
       <div class="step-underline"></div>
 
-      <!-- Step 2 -->
       <div class="step-row">
         <img src="assets/results-icon.png" alt="Results icon" />
         <div>
           <h4>2. Get Instant Results</h4>
           <p>
-            The app will analyze the product and check for allergens based on your
-            preferences.
+            The app will analyze the product and check for allergens based on
+            your preferences.
           </p>
         </div>
       </div>
       <div class="step-underline"></div>
 
-      <!-- Step 3 -->
       <div class="step-row">
         <img src="assets/shop-icon.png" alt="Shop icon" />
         <div>
@@ -58,16 +49,26 @@
 <section class="key-features">
   <div class="container">
     <div class="features-header">
-      <h2>Key Features</h2>
+      <span>Key Features</span>
     </div>
     <ul class="feature-list">
-      <li>✅ Instant Barcode Scanning – Get real-time allergen detection.</li>
-      <li>✅ Personalized Alerts – Set your allergens and get customized warnings.</li>
       <li>
-        ✅ Community Contribution – Help improve the database by adding missing
+        <span class="material-icons check-icon">check</span>
+        Instant Barcode Scanning – Get real-time allergen detection.
+      </li>
+      <li>
+        <span class="material-icons check-icon">check</span>
+        Personalized Alerts – Set your allergens and get customized warnings.
+      </li>
+      <li>
+        <span class="material-icons check-icon">check</span>
+        Community Contribution – Help improve the database by adding missing
         products.
       </li>
-      <li>✅ Safe &amp; Reliable – Powered by verified food data sources.</li>
+      <li>
+        <span class="material-icons check-icon">check</span>
+        Safe &amp; Reliable – Powered by verified food data sources.
+      </li>
     </ul>
   </div>
 </section>

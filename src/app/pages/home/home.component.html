@@ -1,4 +1,3 @@
-<!-- home.component.html -->
 <main class="hero-section">
   <!-- Five larger, rounded shapes on the left side -->
   <div class="vertical-rects">
@@ -15,10 +14,10 @@
       <h2>Your Personal Food Safety Companion</h2>
       <p>
         Discover a smarter way to shop with confidence! Simply scan product
-        barcodes to instantly check for allergens and make informed food choices.
+        barcodes to instantly check for allergens and make informed food
+        choices.
       </p>
       <div class="hero-buttons">
-        <!-- Scroll or link to "How It Works" on the same page -->
         <a href="#how-it-works" class="btn learn-more-btn">Learn More</a>
         <button routerLink="/barcode" class="btn scan-now-btn">Scan Now</button>
       </div>
@@ -46,7 +45,7 @@
 
   <div class="container">
     <div class="how-it-works-header">
-      <h2>How It Works</h2>
+      <span>How It Works</span>
     </div>
 
     <div class="steps">
@@ -66,8 +65,8 @@
         <div>
           <h4>2. Get Instant Results</h4>
           <p>
-            The app will analyze the product and check for allergens based on your
-            preferences.
+            The app will analyze the product and check for allergens based on
+            your preferences.
           </p>
         </div>
       </div>
@@ -93,16 +92,26 @@
 <section class="key-features">
   <div class="container">
     <div class="features-header">
-      <h2>Key Features</h2>
+      <span>Key Features</span>
     </div>
     <ul class="feature-list">
-      <li>✅ Instant Barcode Scanning – Get real-time allergen detection.</li>
-      <li>✅ Personalized Alerts – Set your allergens and get customized warnings.</li>
       <li>
-        ✅ Community Contribution – Help improve the database by adding missing
+        <span class="material-icons check-icon">check</span>
+        Instant Barcode Scanning – Get real-time allergen detection.
+      </li>
+      <li>
+        <span class="material-icons check-icon">check</span>
+        Personalized Alerts – Set your allergens and get customized warnings.
+      </li>
+      <li>
+        <span class="material-icons check-icon">check</span>
+        Community Contribution – Help improve the database by adding missing
         products.
       </li>
-      <li>✅ Safe &amp; Reliable – Powered by verified food data sources.</li>
+      <li>
+        <span class="material-icons check-icon">check</span>
+        Safe &amp; Reliable – Powered by verified food data sources.
+      </li>
     </ul>
   </div>
 </section>

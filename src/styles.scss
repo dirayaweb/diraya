@@ -1,34 +1,36 @@
 /* -----------------------------------------------------
-   0) Material Icons (for eye icons)
+   0) Material Icons + Additional Fonts
 ----------------------------------------------------- */
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+@import url("https://fonts.googleapis.com/css2?family=MonteCarlo&family=Montserrat:wght@400;700&display=swap");
 
 /* -----------------------------------------------------
-   1) Fonts + Global Variables
+   1) Global Variables
 ----------------------------------------------------- */
-@import url("https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Open+Sans:wght@400;600&display=swap");
-
 :root {
-  --color-hero-bg: #f9f4ec;   /* Light cream for hero + nav */
-  --color-brown-bg: #d9c2aa;  /* Brown background */
-  --color-primary: #2e4857;   /* Dark green/teal */
+  --color-hero-bg: #f9f4ec; /* Light cream for hero + nav */
+  --color-brown-bg: #d9c2aa; /* Brown background */
+  --color-primary: #2e4857; /* Dark green/teal */
   --color-secondary: #7ca090; /* Softer teal accent */
   --color-text: #333333;
+  --color-nav-bg: #f9f4ec;
+  --color-nav-text: #333;
 
   /* Navbar = hero background color */
   --color-nav-bg: var(--color-hero-bg);
   --color-nav-text: #333333;
-
-  --font-family-cursive: "Dancing Script", cursive;
-  --font-family-base: "Open Sans", sans-serif;
 }
 
 body {
   margin: 0;
   padding: 0;
-  font-family: var(--font-family-base);
+  font-family: "Montserrat", sans-serif;
   background-color: var(--color-hero-bg);
   color: var(--color-text);
+}
+
+a {
+  text-decoration: none;
 }
 
 /* -----------------------------------------------------
@@ -44,8 +46,10 @@ body {
 }
 
 .nav-link {
+  font-family: "Montserrat", sans-serif;
   color: var(--color-nav-text) !important;
   margin: 0 0.5rem;
+  font-weight: 500;
 }
 
 .nav-link:hover {
@@ -56,10 +60,27 @@ body {
   background-color: var(--color-primary);
   color: #fff;
   border: none;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
 
   &:hover {
     filter: brightness(0.9);
   }
+}
+
+.custom-offcanvas {
+  background-color: var(--color-primary);
+  color: #fff;
+}
+
+.custom-offcanvas .nav-link {
+  color: #fff !important;
+  font-family: "Montserrat", sans-serif;
+  font-size: 1.1rem;
+}
+
+.custom-offcanvas .nav-link:hover {
+  background-color: rgba(255, 255, 255, 0.1);
 }
 
 .user-info {
@@ -72,19 +93,6 @@ body {
   object-fit: cover;
 }
 
-.custom-offcanvas {
-  background-color: var(--color-primary);
-  color: #fff;
-}
-
-.custom-offcanvas .nav-link {
-  color: #fff !important;
-}
-
-.custom-offcanvas .nav-link:hover {
-  background-color: rgba(255, 255, 255, 0.1);
-}
-
 /* -----------------------------------------------------
    3) Home Hero Section
 ----------------------------------------------------- */
@@ -92,10 +100,8 @@ body {
   position: relative;
   min-height: 500px;
   background-color: var(--color-hero-bg);
-  /* no overflow hidden so shapes won't clip */
 }
 
-/* Larger half-rounded shapes on the left edge */
 .vertical-rects {
   position: absolute;
   top: 120px;
@@ -108,7 +114,7 @@ body {
 .vertical-rects .rect {
   width: 50px;
   height: 60px;
-  border-radius: 0 30px 30px 0; /* round right corners */
+  border-radius: 0 30px 30px 0;
   background-color: #d9c2aa;
 }
 
@@ -116,25 +122,25 @@ body {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  padding-top: 3rem;
-  padding-bottom: 3rem;
+  /* Extra left spacing so text isn't too close to shapes */
+  padding: 3rem 1rem 3rem 4rem; /* top right bottom left */
   margin: 0 auto;
   max-width: 1200px;
 }
 
 .hero-text {
   flex: 1 1 350px;
-  padding: 1rem;
 
   h1 {
-    font-family: var(--font-family-cursive);
+    font-family: "MonteCarlo", cursive;
     font-size: 2.5rem;
     color: var(--color-primary);
     margin-bottom: 0.5rem;
   }
 
   h2 {
-    font-family: var(--font-family-base);
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
     font-size: 1.8rem;
     color: var(--color-primary);
     margin-bottom: 1rem;
@@ -143,13 +149,6 @@ body {
   p {
     line-height: 1.6;
     margin-bottom: 1.5rem;
-  }
-}
-
-/* Center hero text on mobile */
-@media (max-width: 768px) {
-  .hero-text {
-    text-align: center;
   }
 }
 
@@ -182,7 +181,6 @@ body {
 .hero-image {
   flex: 1 1 350px;
   text-align: center;
-  padding: 1rem;
 }
 
 .hero-image .main-illustration {
@@ -206,13 +204,13 @@ body {
 }
 
 /* -----------------------------------------------------
-   4) How It Works + Key Features (for Home & About)
+   4) How It Works + Key Features
 ----------------------------------------------------- */
 .how-it-works {
   position: relative;
   background-color: var(--color-brown-bg);
+  color: #fff; /* white text in this section */
   padding: 4rem 1rem;
-  overflow: visible; /* no clipping */
 }
 
 .shape-btm-lft {
@@ -230,13 +228,15 @@ body {
   z-index: 2;
 }
 
+/* White text on green capsule for heading */
 .how-it-works-header {
+  display: inline-block;
+  background-color: var(--color-primary);
+  color: #fff;
+  border-radius: 20px;
+  padding: 0.5rem 1.5rem;
   margin-bottom: 2rem;
-
-  h2 {
-    font-size: 2rem;
-    color: var(--color-primary);
-  }
+  font-weight: 700;
 }
 
 .steps {
@@ -257,18 +257,19 @@ body {
 
   h4 {
     margin-bottom: 0.3rem;
-    color: var(--color-primary);
+    font-family: "Montserrat", sans-serif;
+    font-weight: 700;
     font-size: 1.25rem;
+    color: #fff;
   }
 
   p {
     margin: 0;
-    color: var(--color-text);
+    color: #fff;
     line-height: 1.4;
   }
 }
 
-/* Wider underline, more spacing below each step */
 .step-underline {
   width: 90%;
   height: 3px;
@@ -278,7 +279,8 @@ body {
 }
 
 .key-features {
-  background-color: var(--color-hero-bg);
+  background-color: var(--color-brown-bg);
+  color: #fff;
   padding: 4rem 1rem;
 }
 
@@ -288,59 +290,67 @@ body {
 }
 
 .features-header {
-  margin-bottom: 1.5rem;
-
-  h2 {
-    font-size: 1.8rem;
-    color: var(--color-primary);
-  }
+  display: inline-block;
+  background-color: var(--color-primary);
+  color: #fff;
+  border-radius: 20px;
+  padding: 0.5rem 1.5rem;
+  margin-bottom: 2rem;
+  font-weight: 700;
 }
 
+/* Each bullet has green background, white text */
 .feature-list {
   list-style: none;
   margin: 0;
   padding: 0;
+}
 
-  li {
-    background-color: #d9c2aa;
-    border-radius: 20px;
-    padding: 0.8rem 1rem;
-    margin-bottom: 1rem;
-    display: block;
-    color: #333;
-    font-weight: 600;
-  }
+.feature-list li {
+  background-color: var(--color-primary);
+  color: #fff;
+  border-radius: 10px;
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.check-icon {
+  font-size: 1.25rem;
 }
 
 /* -----------------------------------------------------
-   5) Login + Register Pages
+   5) Login Page
 ----------------------------------------------------- */
-
-/* Common layout for login/register */
-.login-page,
-.register-page {
+.login-page {
   background-color: var(--color-brown-bg);
-  min-height: calc(100vh - 56px); /* adjust if your navbar is different height */
+  min-height: calc(100vh - 56px);
   display: flex;
+  flex-direction: column; /* so we can center the heading + content */
   align-items: center;
-  justify-content: center;
-  padding: 2rem 0;
+  justify-content: flex-start;
+  padding: 2rem 1rem;
 }
 
-.login-content,
-.register-content {
+.login-title {
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  color: #fff;
+}
+
+.login-content {
   max-width: 1200px;
   display: flex;
   align-items: center;
   justify-content: center;
+  width: 100%;
 }
 
-/* The left illustration hidden on small screens */
-.login-illustration,
-.register-illustration {
+/* Show illustration on left or top in mobile */
+.login-illustration {
   flex: 1;
-  justify-content: center;
-
   img {
     max-width: 400px;
     width: 100%;
@@ -348,15 +358,12 @@ body {
 }
 
 @media (max-width: 768px) {
-  .login-illustration,
-  .register-illustration {
+  .login-illustration {
     display: none !important;
   }
 }
 
-/* The form on the right side */
-.login-form,
-.register-form {
+.login-form {
   flex: 1;
   max-width: 400px;
   background: transparent;
@@ -364,26 +371,16 @@ body {
   color: #fff;
 }
 
-/* Title/subtitle styling */
-.signin-title,
-.register-title {
-  font-size: 2rem;
-  color: #fff;
-  margin-bottom: 1rem;
+.placeholder-green::placeholder {
+  color: var(--color-primary);
 }
 
-.register-subtitle {
-  color: #fff;
-  margin-bottom: 1.5rem;
-}
-
-/* White background for inputs */
-.login-form .form-control,
-.register-form .form-control {
+.form-control.placeholder-green {
   background: #fff;
   border-radius: 20px;
   border: 2px solid transparent;
   color: #000;
+  font-family: "Montserrat", sans-serif;
 }
 
 .toggle-password {
@@ -392,29 +389,47 @@ body {
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
-  user-select: none;
 }
 
-/* Primary (dark teal) button with pill shape */
-.login-form .btn-primary,
-.register-form .btn-primary {
+.login-form .btn-primary {
   background-color: var(--color-primary);
   border: none;
   border-radius: 20px;
   font-weight: 600;
-
   &:hover {
     filter: brightness(0.9);
   }
 }
 
-/* The google button, similar style for login and register */
+.separator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  position: relative;
+  text-align: center;
+}
+
+.separator::before,
+.separator::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #fff;
+  margin: 0 1rem;
+}
+
+.separator span {
+  font-weight: 600;
+}
+
 .btn-google-auth {
   background: #fff;
   color: #000;
   border: 2px solid #ccc;
   border-radius: 20px;
   font-weight: 600;
+  font-family: "Montserrat", sans-serif;
 
   img {
     width: 20px;
@@ -422,14 +437,287 @@ body {
   }
 }
 
-/* Links inside the forms */
-.login-form a.create-link,
-.register-form a.signin-link {
+.login-form a.create-link {
   color: #fff;
   text-decoration: underline;
 }
 
-.login-form a.create-link:hover,
-.register-form a.signin-link:hover {
+.login-form a.create-link:hover {
   color: #eee;
+}
+
+/* -----------------------------------------------------
+   6) Register Page
+----------------------------------------------------- */
+.register-page {
+  background-color: var(--color-brown-bg);
+  min-height: calc(100vh - 56px);
+  display: flex;
+  flex-direction: column; /* center the title on entire page */
+  align-items: center;
+  justify-content: flex-start;
+  padding: 2rem 1rem;
+}
+
+.register-title {
+  font-size: 2rem;
+  color: #fff;
+  margin-bottom: 0.5rem;
+}
+
+.register-subtitle {
+  color: #fff;
+  margin-bottom: 2rem;
+}
+
+.register-content {
+  max-width: 1200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 2rem;
+}
+
+.register-illustration {
+  flex: 1;
+  img {
+    max-width: 400px;
+    width: 100%;
+  }
+}
+
+/* On small screens, maybe hide or reorder the illustration */
+@media (max-width: 768px) {
+  .register-illustration {
+    order: -1;
+    margin-bottom: 2rem;
+  }
+}
+
+.register-form {
+  flex: 1;
+  max-width: 400px;
+  background: transparent;
+  margin: 0 1rem;
+  color: #fff;
+}
+
+.placeholder-green::placeholder {
+  color: var(--color-primary);
+}
+
+.form-control.placeholder-green {
+  background: #fff;
+  border-radius: 20px;
+  border: 2px solid transparent;
+  color: #000;
+  font-family: "Montserrat", sans-serif;
+}
+
+.register-form .btn-primary {
+  background-color: var(--color-primary);
+  border: none;
+  border-radius: 20px;
+  font-weight: 600;
+  font-family: "Montserrat", sans-serif;
+
+  &:hover {
+    filter: brightness(0.9);
+  }
+}
+
+.separator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  position: relative;
+  text-align: center;
+  margin: 1rem 0;
+}
+
+.separator::before,
+.separator::after {
+  content: "";
+  flex: 1;
+  height: 1px;
+  background: #fff;
+  margin: 0 1rem;
+}
+
+.separator span {
+  font-weight: 600;
+}
+
+.btn-google-auth {
+  background: #fff;
+  color: #000;
+  border: 2px solid #ccc;
+  border-radius: 20px;
+  font-weight: 600;
+  font-family: "Montserrat", sans-serif;
+
+  img {
+    width: 20px;
+    margin-right: 8px;
+  }
+}
+
+.text-green {
+  color: var(--color-primary);
+  font-weight: 600;
+}
+
+.text-blue {
+  color: #0000ee;
+  font-weight: 600;
+  text-decoration: underline;
+}
+
+/* -----------------------------------------------------
+   7) Barcode Page
+----------------------------------------------------- */
+.barcode-page {
+  background-color: var(--color-brown-bg);
+  min-height: calc(100vh - 56px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.barcode-container {
+  width: 90%;
+  max-width: 600px;
+  background-color: transparent;
+  border: 1px solid #fff;
+  border-radius: 8px;
+  padding-bottom: 2rem;
+  margin: 0 auto;
+  position: relative;
+}
+
+/* White, rounded top rectangle */
+.barcode-header {
+  background-color: #fff;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  padding: 1rem;
+  text-align: center;
+
+  h2 {
+    margin: 0;
+    font-size: 1.5rem;
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+}
+
+.scanner-area {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 1rem;
+  min-height: 200px; /* adjust if needed */
+}
+
+.scan-btn {
+  border-radius: 20px;
+  background-color: var(--color-primary);
+  font-weight: 600;
+  border: none;
+  color: #fff;
+  width: 130px;
+  &:hover {
+    filter: brightness(0.9);
+  }
+}
+
+.result-container {
+  max-width: 400px;
+  margin: 2rem auto;
+}
+
+.card {
+  border-radius: 8px;
+  background-color: #fff;
+  text-align: center;
+}
+
+.alert {
+  border-radius: 8px;
+}
+
+/* -----------------------------------------------------
+   8) User Page
+----------------------------------------------------- */
+.user-page {
+  background-color: var(--color-brown-bg);
+  min-height: calc(100vh - 56px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+}
+
+.user-container {
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 600px;
+  text-align: center;
+
+  h2 {
+    color: var(--color-primary);
+    margin-bottom: 1rem;
+    font-weight: 700;
+  }
+}
+
+.allergy-section {
+  margin-top: 2rem;
+
+  h4 {
+    font-weight: 700;
+    color: var(--color-primary);
+  }
+
+  select.form-select {
+    border-radius: 20px;
+  }
+
+  .btn-primary {
+    background-color: var(--color-primary);
+    border: none;
+    border-radius: 20px;
+    font-weight: 600;
+    font-family: "Montserrat", sans-serif;
+
+    &:hover {
+      filter: brightness(0.9);
+    }
+  }
+}
+
+/* -----------------------------------------------------
+   9) Make shapes smaller on mobile
+----------------------------------------------------- */
+@media (max-width: 768px) {
+  .vertical-rects .rect {
+    width: 30px;
+    height: 40px;
+    border-radius: 0 20px 20px 0;
+  }
+
+  .shape-right img {
+    max-width: 150px;
+  }
+
+  .shape-btm-lft {
+    max-width: 100px;
+  }
 }

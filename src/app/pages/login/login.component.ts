@@ -14,24 +14,26 @@ import { RouterModule } from '@angular/router';
 export class LoginComponent {
   email = '';
   password = '';
-  rememberMe = true; // Default to true
+  rememberMe = true; // Default
   errorMessage = '';
 
-  // For toggling password visibility
+  // Toggle password visibility
   showPassword = false;
 
   constructor(private authService: AuthService, private router: Router) {}
 
   login() {
     this.errorMessage = '';
-    this.authService.login(this.email, this.password, this.rememberMe).subscribe({
-      next: () => {
-        this.router.navigate(['/user']);
-      },
-      error: (err) => {
-        this.errorMessage = err.message || 'Error logging in';
-      },
-    });
+    this.authService
+      .login(this.email, this.password, this.rememberMe)
+      .subscribe({
+        next: () => {
+          this.router.navigate(['/user']);
+        },
+        error: (err) => {
+          this.errorMessage = err.message || 'Error logging in';
+        },
+      });
   }
 
   googleLogin() {

@@ -1,57 +1,61 @@
-<!-- register.component.html -->
 <div class="register-page">
+  <!-- Center the main title & subtitle on the entire page -->
+  <h1 class="register-title text-center">Create Account</h1>
+  <p class="register-subtitle text-center">
+    Fill out the information below to create your account
+  </p>
+
   <div class="register-content container">
-    <!-- Left column: illustration (hidden on small screens) -->
-    <div class="register-illustration d-none d-md-flex">
-      <!-- Adjust asset name/path if needed -->
+    <div class="register-illustration">
       <img
         src="assets/register-illustration.png"
         alt="Create Account Illustration"
       />
     </div>
 
-    <!-- Right column: form -->
     <div class="register-form">
-      <h1 class="register-title">Create Account</h1>
-      <p class="register-subtitle">
-        Fill out the information below to create your account
-      </p>
-
-      <!-- USERNAME -->
+      <!-- placeholders in green -->
       <div class="mb-3">
-        <label class="form-label">User Name</label>
-        <input class="form-control" type="text" [(ngModel)]="username" />
+        <input
+          class="form-control placeholder-green"
+          type="text"
+          placeholder="User Name"
+          [(ngModel)]="username"
+        />
       </div>
 
-      <!-- EMAIL -->
       <div class="mb-3">
-        <label class="form-label">Email</label>
-        <input class="form-control" type="email" [(ngModel)]="email" />
+        <input
+          class="form-control placeholder-green"
+          type="email"
+          placeholder="Email"
+          [(ngModel)]="email"
+        />
       </div>
 
-      <!-- PASSWORD -->
-      <div class="mb-3">
-        <label class="form-label">Password</label>
-        <div class="position-relative">
-          <input
-            class="form-control"
-            [type]="showPassword ? 'text' : 'password'"
-            [(ngModel)]="password"
-          />
-          <span
-            class="material-icons toggle-password"
-            (click)="showPassword = !showPassword"
-            [attr.aria-label]="'Toggle password visibility'"
-          >
-            {{ showPassword ? 'visibility_off' : 'visibility' }}
-          </span>
-        </div>
+      <div class="mb-3 position-relative">
+        <input
+          class="form-control placeholder-green"
+          [type]="showPassword ? 'text' : 'password'"
+          placeholder="Password"
+          [(ngModel)]="password"
+        />
+        <span
+          class="material-icons toggle-password"
+          (click)="showPassword = !showPassword"
+          [attr.aria-label]="'Toggle password visibility'"
+        >
+          {{ showPassword ? "visibility_off" : "visibility" }}
+        </span>
       </div>
 
-      <!-- ALLERGIES (multiple select) -->
       <div class="mb-3">
-        <label class="form-label">Selection of allergens</label>
-        <select multiple class="form-select" [(ngModel)]="selectedAllergies">
+        <select
+          multiple
+          class="form-select placeholder-green"
+          [(ngModel)]="selectedAllergies"
+        >
+          <option disabled>Select one or more allergens</option>
           <option *ngFor="let allergy of allergies" [value]="allergy">
             {{ allergy }}
           </option>
@@ -62,14 +66,14 @@
         {{ errorMessage }}
       </div>
 
-      <!-- Primary create button -->
       <button class="btn btn-primary w-100 mb-3" (click)="register()">
         Create
       </button>
 
-      <hr class="mb-3" />
+      <div class="separator mb-3">
+        <span>or</span>
+      </div>
 
-      <!-- Google Register Button -->
       <button
         class="btn btn-google-auth w-100 mb-3 d-flex align-items-center justify-content-center"
         (click)="googleRegister()"
@@ -82,9 +86,8 @@
       </button>
 
       <div class="text-center">
-        <span>Already have an account?? 
-          <a routerLink="/login" class="signin-link">Sign in</a>
-        </span>
+        <span class="text-green me-1">Already have an account?</span>
+        <a routerLink="/login" class="text-blue">Sign in</a>
       </div>
     </div>
   </div>
