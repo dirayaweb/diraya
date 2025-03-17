@@ -12,9 +12,9 @@ import { RouterModule } from '@angular/router';
   templateUrl: './register.component.html',
 })
 export class RegisterComponent {
+  username = '';
   email = '';
   password = '';
-  username = '';
   selectedAllergies: string[] = [];
   allergies = [
     'حليب - Milk',
@@ -26,17 +26,15 @@ export class RegisterComponent {
   errorMessage = '';
   step2Google = false; // Once user logs in with Google, we show allergies selection
 
+  // Toggle password visibility
+  showPassword = false;
+
   constructor(private authService: AuthService, private router: Router) {}
 
   register() {
     this.errorMessage = '';
     this.authService
-      .register(
-        this.email,
-        this.password,
-        this.username,
-        this.selectedAllergies
-      )
+      .register(this.email, this.password, this.username, this.selectedAllergies)
       .subscribe({
         next: () => {
           this.router.navigate(['/user']);
@@ -49,10 +47,10 @@ export class RegisterComponent {
 
   googleRegister() {
     this.errorMessage = '';
-    // We sign in with Google as "register" flow.
+    // Sign in with Google as "register" flow
     this.authService.googleSignIn(true).subscribe({
-      next: (result) => {
-        // Now that user is signed in with Google, prompt to pick allergies.
+      next: () => {
+        // Now user is signed in with Google, optionally show allergies selection
         this.step2Google = true;
       },
       error: (err) => {

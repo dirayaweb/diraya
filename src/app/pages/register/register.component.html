@@ -1,43 +1,91 @@
-<div
-  class="container d-flex flex-column align-items-center mt-5"
-  style="max-width: 400px"
->
-  <h2 class="mb-4">Create a New Account</h2>
-  <div class="mb-3 w-100">
-    <label class="form-label">Username</label>
-    <input class="form-control" type="text" [(ngModel)]="username" />
+<!-- register.component.html -->
+<div class="register-page">
+  <div class="register-content container">
+    <!-- Left column: illustration (hidden on small screens) -->
+    <div class="register-illustration d-none d-md-flex">
+      <!-- Adjust asset name/path if needed -->
+      <img
+        src="assets/register-illustration.png"
+        alt="Create Account Illustration"
+      />
+    </div>
+
+    <!-- Right column: form -->
+    <div class="register-form">
+      <h1 class="register-title">Create Account</h1>
+      <p class="register-subtitle">
+        Fill out the information below to create your account
+      </p>
+
+      <!-- USERNAME -->
+      <div class="mb-3">
+        <label class="form-label">User Name</label>
+        <input class="form-control" type="text" [(ngModel)]="username" />
+      </div>
+
+      <!-- EMAIL -->
+      <div class="mb-3">
+        <label class="form-label">Email</label>
+        <input class="form-control" type="email" [(ngModel)]="email" />
+      </div>
+
+      <!-- PASSWORD -->
+      <div class="mb-3">
+        <label class="form-label">Password</label>
+        <div class="position-relative">
+          <input
+            class="form-control"
+            [type]="showPassword ? 'text' : 'password'"
+            [(ngModel)]="password"
+          />
+          <span
+            class="material-icons toggle-password"
+            (click)="showPassword = !showPassword"
+            [attr.aria-label]="'Toggle password visibility'"
+          >
+            {{ showPassword ? 'visibility_off' : 'visibility' }}
+          </span>
+        </div>
+      </div>
+
+      <!-- ALLERGIES (multiple select) -->
+      <div class="mb-3">
+        <label class="form-label">Selection of allergens</label>
+        <select multiple class="form-select" [(ngModel)]="selectedAllergies">
+          <option *ngFor="let allergy of allergies" [value]="allergy">
+            {{ allergy }}
+          </option>
+        </select>
+      </div>
+
+      <div *ngIf="errorMessage" class="alert alert-danger mb-3">
+        {{ errorMessage }}
+      </div>
+
+      <!-- Primary create button -->
+      <button class="btn btn-primary w-100 mb-3" (click)="register()">
+        Create
+      </button>
+
+      <hr class="mb-3" />
+
+      <!-- Google Register Button -->
+      <button
+        class="btn btn-google-auth w-100 mb-3 d-flex align-items-center justify-content-center"
+        (click)="googleRegister()"
+      >
+        <img
+          src="https://developers.google.com/identity/images/g-logo.png"
+          alt="Google Logo"
+        />
+        <span>Continue with Google</span>
+      </button>
+
+      <div class="text-center">
+        <span>Already have an account?? 
+          <a routerLink="/login" class="signin-link">Sign in</a>
+        </span>
+      </div>
+    </div>
   </div>
-  <div class="mb-3 w-100">
-    <label class="form-label">Email</label>
-    <input class="form-control" type="email" [(ngModel)]="email" />
-  </div>
-  <div class="mb-3 w-100">
-    <label class="form-label">Password</label>
-    <input class="form-control" type="password" [(ngModel)]="password" />
-  </div>
-  <div class="mb-3 w-100">
-    <label class="form-label">Allergies</label>
-    <select multiple class="form-select" [(ngModel)]="selectedAllergies">
-      <option *ngFor="let allergy of allergies" [value]="allergy">
-        {{ allergy }}
-      </option>
-    </select>
-  </div>
-  <div *ngIf="errorMessage" class="alert alert-danger w-100">
-    {{ errorMessage }}
-  </div>
-  <button class="btn btn-dark w-100 mb-2" (click)="register()">Register</button>
-  <button
-    class="btn d-flex align-items-center justify-content-center border w-100 mb-3"
-    style="background-color: #fff; color: #000"
-    (click)="googleRegister()"
-  >
-    <img
-      src="https://developers.google.com/identity/images/g-logo.png"
-      alt="Google Logo"
-      style="width: 20px; margin-right: 8px"
-    />
-    Continue with Google
-  </button>
-  <button class="btn btn-link w-100" routerLink="/login">Login</button>
 </div>

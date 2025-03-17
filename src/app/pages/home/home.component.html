@@ -1,3 +1,4 @@
+<!-- home.component.html -->
 <main class="hero-section">
   <!-- Five larger, rounded shapes on the left side -->
   <div class="vertical-rects">
@@ -14,17 +15,16 @@
       <h2>Your Personal Food Safety Companion</h2>
       <p>
         Discover a smarter way to shop with confidence! Simply scan product
-        barcodes to instantly check for allergens and make informed food
-        choices.
+        barcodes to instantly check for allergens and make informed food choices.
       </p>
       <div class="hero-buttons">
-        <!-- Scroll to how-it-works -->
+        <!-- Scroll or link to "How It Works" on the same page -->
         <a href="#how-it-works" class="btn learn-more-btn">Learn More</a>
         <button routerLink="/barcode" class="btn scan-now-btn">Scan Now</button>
       </div>
     </div>
+
     <div class="hero-image">
-      <!-- Main illustration -->
       <img
         class="main-illustration"
         src="assets/hero-woman.png"
@@ -33,7 +33,7 @@
     </div>
   </div>
 
-  <!-- shape-right bridging the boundary between hero and how-it-works -->
+  <!-- shape-right bridging hero & how-it-works -->
   <div class="shape-right">
     <img src="assets/shape-right.png" alt="Divider shape" />
   </div>
@@ -41,7 +41,7 @@
 
 <!-- How It Works Section -->
 <section id="how-it-works" class="how-it-works">
-  <!-- Optional bottom-left shape -->
+  <!-- shape-btm-lft in how-it-works -->
   <img class="shape-btm-lft" src="assets/shape-btm-lft.png" alt="" />
 
   <div class="container">
@@ -66,8 +66,8 @@
         <div>
           <h4>2. Get Instant Results</h4>
           <p>
-            The app will analyze the product and check for allergens based on
-            your preferences.
+            The app will analyze the product and check for allergens based on your
+            preferences.
           </p>
         </div>
       </div>
@@ -97,9 +97,7 @@
     </div>
     <ul class="feature-list">
       <li>✅ Instant Barcode Scanning – Get real-time allergen detection.</li>
-      <li>
-        ✅ Personalized Alerts – Set your allergens and get customized warnings.
-      </li>
+      <li>✅ Personalized Alerts – Set your allergens and get customized warnings.</li>
       <li>
         ✅ Community Contribution – Help improve the database by adding missing
         products.
