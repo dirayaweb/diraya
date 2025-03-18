@@ -1,10 +1,13 @@
 <div class="user-page">
   <div class="user-container container">
-    <h2>User Account</h2>
     <p>Welcome, {{ userName }}</p>
     <div class="allergy-section mt-4">
       <h4>Your Allergies:</h4>
-      <select multiple class="form-select w-50 mx-auto my-3" [(ngModel)]="userAllergies">
+      <select
+        multiple
+        class="form-select w-50 mx-auto my-3"
+        [(ngModel)]="userAllergies"
+      >
         <option disabled>Select allergies to remove or add</option>
         <option *ngFor="let allergy of allAllergies" [value]="allergy">
           {{ allergy }}
@@ -20,28 +23,66 @@
       <ng-template #noAllergies>
         <p>You have no saved allergies.</p>
       </ng-template>
-      <button class="btn btn-primary mt-3" (click)="updateAllergies()">Save Changes</button>
+      <button class="btn btn-primary mt-3" (click)="updateAllergies()">
+        Save Changes
+      </button>
     </div>
     <div class="scan-history mt-5">
       <h4>Scan History</h4>
-      <div *ngIf="scanHistory$ | async as scans; else noScans">
-        <div class="scan-item" *ngFor="let scan of scans">
+      <div *ngIf="allScans && allScans.length > 0; else noScans">
+        <div class="scan-item" *ngFor="let scan of displayScans">
           <div class="scan-info">
-            <div class="scan-product">{{ scan.productName || 'N/A' }}</div>
+            <div class="scan-product">{{ scan.productName || "N/A" }}</div>
             <div class="scan-barcode">{{ scan.barcode }}</div>
-            <div class="scan-date">{{ scan.scanDate.toDate() | date:'short' }}</div>
+            <div class="scan-date">
+              {{ scan.scanDate.toDate() | date : "short" }}
+            </div>
           </div>
           <div class="scan-result">
-            <span *ngIf="scan.scanResult === 'safe'" class="text-success material-icons">check_circle</span>
-            <span *ngIf="scan.scanResult === 'unsafe'" class="text-danger material-icons">cancel</span>
-            <span *ngIf="scan.scanResult === 'notfound'" class="text-warning material-icons">priority_high</span>
+            <span
+              *ngIf="scan.scanResult === 'safe'"
+              class="text-success material-icons"
+              >check_circle</span
+            >
+            <span
+              *ngIf="scan.scanResult === 'unsafe'"
+              class="text-danger material-icons"
+              >cancel</span
+            >
+            <span
+              *ngIf="scan.scanResult === 'notfound'"
+              class="text-warning material-icons"
+              >priority_high</span
+            >
           </div>
+        </div>
+        <div class="pagination mt-3">
+          <button
+            class="btn btn-secondary me-2"
+            (click)="previousPage()"
+            [disabled]="currentPage <= 1"
+          >
+            Previous
+          </button>
+          <span>Page {{ currentPage }} of {{ totalPages }}</span>
+          <button
+            class="btn btn-secondary ms-2"
+            (click)="nextPage()"
+            [disabled]="currentPage >= totalPages"
+          >
+            Next
+          </button>
         </div>
       </div>
       <ng-template #noScans>
         <p>No previous scans found.</p>
       </ng-template>
     </div>
-    <button class="btn btn-outline-danger mt-4" (click)="logout()">Logout</button>
+    <div class="actions mt-4">
+      <button class="btn btn-danger" (click)="logout()">Logout</button>
+      <button class="btn btn-danger ms-2" (click)="clearHistory()">
+        Clear History
+      </button>
+    </div>
   </div>
 </div>

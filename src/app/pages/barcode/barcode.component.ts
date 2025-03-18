@@ -4,14 +4,20 @@ import { ZXingScannerModule } from '@zxing/ngx-scanner';
 import { BarcodeFormat } from '@zxing/library';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { AuthService } from '../../services/auth.service';
-import { Firestore, collection, doc, setDoc, Timestamp } from '@angular/fire/firestore';
+import {
+  Firestore,
+  collection,
+  doc,
+  setDoc,
+  Timestamp,
+} from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-barcode',
   standalone: true,
   imports: [CommonModule, ZXingScannerModule, HttpClientModule],
   templateUrl: './barcode.component.html',
-  styleUrls: ['./barcode.component.scss']
+  styleUrls: ['./barcode.component.scss'],
 })
 export class BarcodeComponent {
   isCameraActive = false;
@@ -25,17 +31,36 @@ export class BarcodeComponent {
     BarcodeFormat.EAN_13,
     BarcodeFormat.EAN_8,
     BarcodeFormat.UPC_A,
-    BarcodeFormat.UPC_E
+    BarcodeFormat.UPC_E,
   ];
   resultStatus: 'safe' | 'unsafe' | 'notfound' | null = null;
 
-  constructor(private http: HttpClient, private authService: AuthService, private firestore: Firestore) {}
+  // New properties to hold product details
+  productName: string | null = null;
+  ingredientsText: string | null = null;
+  allergens: string[] = [];
+
+  // Video constraints to help mobile camera focus
+  videoConstraints = {
+    facingMode: { exact: 'environment' },
+    advanced: [{ focusMode: 'continuous' }],
+  };
+
+  constructor(
+    private http: HttpClient,
+    private authService: AuthService,
+    private firestore: Firestore
+  ) {}
 
   startCamera(): void {
     this.isCameraActive = true;
     this.scannedResult = '';
     this.errorMsg = '';
     this.resultStatus = null;
+    // Reset product details on each new scan
+    this.productName = null;
+    this.ingredientsText = null;
+    this.allergens = [];
   }
 
   stopCamera(): void {
@@ -50,7 +75,9 @@ export class BarcodeComponent {
     }, 300);
   }
 
-  onScanFailure(error: any): void {}
+  onScanFailure(error: any): void {
+    // Handle scan failure if needed
+  }
 
   onCamerasFound(devices: MediaDeviceInfo[]): void {
     this.availableDevices = devices;
@@ -61,7 +88,9 @@ export class BarcodeComponent {
     }
   }
 
-  onDeviceSelect(event: Event): void {}
+  onDeviceSelect(event: Event): void {
+    // Implement device selection if needed
+  }
 
   fetchProductData(barcode: string): void {
     const url = `https://world.openfoodfacts.org/api/v0/product/${barcode}.json`;
@@ -69,29 +98,50 @@ export class BarcodeComponent {
       next: (data: any) => {
         if (!data || data.status === 0 || !data.product) {
           this.resultStatus = 'notfound';
+          this.productName = null;
+          this.ingredientsText = null;
+          this.allergens = [];
           this.saveScan(barcode, null, null, 'notfound');
           return;
         }
         const allergens = data.product.allergens_tags || [];
-        console.log(data);
-        const productName = data.product.product_name || 'Unknown';
-        const ingredientsText = data.product.ingredients_text || 'No details';
+        this.productName = data.product.product_name || 'Unknown';
+        this.ingredientsText = data.product.ingredients_text || 'No details';
+        this.allergens = allergens;
         if (allergens.length > 0) {
           this.resultStatus = 'unsafe';
-          this.saveScan(barcode, productName, ingredientsText, 'unsafe');
+          this.saveScan(
+            barcode,
+            this.productName,
+            this.ingredientsText,
+            'unsafe'
+          );
         } else {
           this.resultStatus = 'safe';
-          this.saveScan(barcode, productName, ingredientsText, 'safe');
+          this.saveScan(
+            barcode,
+            this.productName,
+            this.ingredientsText,
+            'safe'
+          );
         }
       },
       error: () => {
         this.resultStatus = 'notfound';
+        this.productName = null;
+        this.ingredientsText = null;
+        this.allergens = [];
         this.saveScan(barcode, null, null, 'notfound');
-      }
+      },
     });
   }
 
-  saveScan(barcode: string, productName: string | null, ingredients: string | null, status: string): void {
+  saveScan(
+    barcode: string,
+    productName: string | null,
+    ingredients: string | null,
+    status: string
+  ): void {
     const user = this.authService.getCurrentUser();
     if (!user) return;
     const colRef = collection(this.firestore, `users/${user.uid}/scans`);
@@ -101,7 +151,7 @@ export class BarcodeComponent {
       productName,
       ingredients,
       scanResult: status,
-      scanDate: Timestamp.now()
+      scanDate: Timestamp.now(),
     };
     setDoc(docRef, dataToSave);
   }
