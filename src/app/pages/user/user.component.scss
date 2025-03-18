@@ -1,0 +1,38 @@
+.user-page {
+    padding: 20px 0;
+  }
+  .user-container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .allergy-section {
+    text-align: center;
+  }
+  .scan-history {
+    margin-top: 40px;
+  }
+  .scan-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 5px auto;
+    max-width: 600px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    padding: 8px;
+  }
+  .scan-info {
+    flex: 1;
+    text-align: left;
+    margin-left: 10px;
+  }
+  .scan-product {
+    font-weight: 600;
+  }
+  .scan-result {
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+  }
+  

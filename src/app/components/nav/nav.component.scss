@@ -1,0 +1,40 @@
+.custom-nav {
+  background-color: rgba(232, 225, 206, 1);
+}
+
+.diraya-logo {
+  width: 100px;
+}
+
+.btn-login {
+  background-color: rgba(23, 85, 93, 1);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 8px 16px;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+}
+
+.custom-offcanvas .offcanvas-custom-body {
+  background-color: rgba(82, 125, 130, 1);
+  height: 100%;
+  color: #fff;
+}
+
+.custom-offcanvas .nav-link {
+  color: #fff;
+}
+
+.custom-offcanvas .nav-link:hover {
+  color: #ddd;
+}
+
+@media (max-width: 767px) {
+  .diraya-logo {
+    width: 80px;
+  }
+}

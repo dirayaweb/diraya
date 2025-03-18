@@ -1,0 +1,94 @@
+.barcode-page {
+  background-color: rgba(201, 168, 135, 1);
+  min-height: 100vh;
+  padding: 40px 0;
+  font-family: 'Montserrat', sans-serif;
+  color: rgba(62, 62, 62, 1);
+}
+
+.barcode-header {
+  background-color: #fff;
+  width: 80%;
+  margin: 0 auto;
+  border-radius: 15px 15px 0 0;
+  text-align: center;
+  padding: 15px;
+  max-width: 600px;
+}
+
+.barcode-header h2 {
+  margin: 0;
+  color: rgba(23, 85, 93, 1);
+  font-weight: 700;
+}
+
+.barcode-body {
+  width: 80%;
+  margin: 0 auto;
+  max-width: 600px;
+  background-color: #fff;
+  border-radius: 0 0 15px 15px;
+  padding: 20px;
+}
+
+.scanner-box {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.start-scan-btn {
+  background-color: rgba(23, 85, 93, 1);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 30px;
+  font-weight: 600;
+}
+
+.result-container {
+  text-align: center;
+}
+
+.status-card {
+  background-color: #fff;
+  border-radius: 15px;
+  padding: 20px;
+  margin: 15px auto;
+  max-width: 500px;
+  text-align: center;
+}
+
+.status-card img {
+  width: 50px;
+  margin-bottom: 10px;
+}
+
+.status-card h4 {
+  font-size: 1.2rem;
+  color: rgba(23, 85, 93, 1);
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.safe-card {
+  border: 3px solid #2f80ed;
+}
+
+.unsafe-card {
+  border: 3px solid #e63946;
+}
+
+.notfound-card {
+  border: 3px solid #ff9900;
+}
+
+@media (max-width: 767px) {
+  .barcode-header,
+  .barcode-body {
+    width: 90%;
+  }
+  .status-card {
+    margin: 15px auto;
+    width: 100%;
+  }
+}

@@ -21,23 +21,16 @@
         <a class="btn btn-login" routerLink="/login">Login / Register</a>
       </div>
       <ng-template #loggedIn>
-        <div
-          class="d-flex align-items-center user-info"
-          (click)="goToUserPage()"
-        >
+        <div class="d-flex align-items-center user-info" (click)="goToUserPage()">
           <img
             [src]="avatarUrl"
             alt="Avatar"
             class="rounded-circle me-2 user-avatar"
           />
-          <span class="d-none d-md-inline">{{
-            user?.displayName || user?.email
-          }}</span>
+          <span class="d-none d-md-inline">{{ user?.displayName || user?.email }}</span>
         </div>
       </ng-template>
     </div>
-
-    <!-- Mobile Toggler -->
     <button
       class="navbar-toggler d-lg-none"
       type="button"
@@ -48,25 +41,21 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-
-    <!-- Offcanvas for mobile -->
     <div
       class="offcanvas offcanvas-end d-lg-none custom-offcanvas"
       tabindex="-1"
       id="offcanvasNavbar"
     >
-      <!-- Removed the "x" button from offcanvas header -->
       <div class="offcanvas-header d-none"></div>
-
-      <div class="offcanvas-body">
-        <!-- Move login/register button to top in mobile view -->
-        <div class="mb-3" *ngIf="!user; else mobileLoggedIn">
+      <div class="offcanvas-body offcanvas-custom-body">
+        <div *ngIf="!user; else mobileLoggedIn">
           <a
             class="btn btn-login w-100 text-white"
             routerLink="/login"
             (click)="dismissOffcanvas()"
-            >Login / Register</a
           >
+            Login / Register
+          </a>
         </div>
         <ng-template #mobileLoggedIn>
           <div
@@ -78,31 +67,18 @@
               alt="Avatar"
               class="rounded-circle me-2 user-avatar"
             />
-            <!-- Show user email in white text -->
-            <span class="text-white">{{
-              user?.displayName || user?.email
-            }}</span>
+            <span class="text-white">{{ user?.displayName || user?.email }}</span>
           </div>
         </ng-template>
-
         <ul class="navbar-nav mb-2 mb-lg-0">
           <li class="nav-item">
-            <a class="nav-link" routerLink="/" (click)="dismissOffcanvas()"
-              >Home</a
-            >
+            <a class="nav-link" routerLink="/" (click)="dismissOffcanvas()">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/about" (click)="dismissOffcanvas()"
-              >About Us</a
-            >
+            <a class="nav-link" routerLink="/about" (click)="dismissOffcanvas()">About Us</a>
           </li>
           <li class="nav-item" *ngIf="user">
-            <a
-              class="nav-link"
-              routerLink="/barcode"
-              (click)="dismissOffcanvas()"
-              >Barcode Scanning</a
-            >
+            <a class="nav-link" routerLink="/barcode" (click)="dismissOffcanvas()">Barcode Scanning</a>
           </li>
         </ul>
       </div>

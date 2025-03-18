@@ -1,21 +1,17 @@
 <div class="register-page">
-  <!-- Page-level heading and subtitle, centered on entire page -->
   <h1 class="register-title text-center">Create Account</h1>
   <p class="register-subtitle text-center">
     Fill out the information below to create your account
   </p>
 
   <div class="register-content container">
-    <!-- Always display illustration, reorder in mobile via CSS -->
     <div class="register-illustration">
       <img
         src="assets/register-illustration.png"
         alt="Create Account Illustration"
       />
     </div>
-
     <div class="register-form">
-      <!-- placeholders in green -->
       <div class="mb-3">
         <input
           class="form-control placeholder-green"
@@ -24,7 +20,6 @@
           [(ngModel)]="username"
         />
       </div>
-
       <div class="mb-3">
         <input
           class="form-control placeholder-green"
@@ -33,7 +28,6 @@
           [(ngModel)]="email"
         />
       </div>
-
       <div class="mb-3 position-relative">
         <input
           class="form-control placeholder-green"
@@ -49,7 +43,6 @@
           {{ showPassword ? "visibility_off" : "visibility" }}
         </span>
       </div>
-
       <div class="mb-3">
         <select
           multiple
@@ -62,21 +55,17 @@
           </option>
         </select>
       </div>
-
       <div *ngIf="errorMessage" class="alert alert-danger mb-3">
         {{ errorMessage }}
       </div>
-
-      <button class="btn btn-primary w-100 mb-3" (click)="register()">
+      <button class="btn w-100 mb-3 create-btn" (click)="register()">
         Create
       </button>
-
       <div class="separator mb-3">
         <span>or</span>
       </div>
-
       <button
-        class="btn btn-google-auth w-100 mb-3 d-flex align-items-center justify-content-center"
+        class="btn btn-google-auth w-100 mb-3"
         (click)="googleRegister()"
       >
         <img
@@ -85,7 +74,6 @@
         />
         <span>Continue with Google</span>
       </button>
-
       <div class="text-center">
         <span class="text-green me-1">Already have an account?</span>
         <a routerLink="/login" class="text-blue">Sign in</a>

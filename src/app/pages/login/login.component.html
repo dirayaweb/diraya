@@ -1,15 +1,10 @@
 <div class="login-page">
-  <!-- Page-level heading, centered -->
   <h1 class="login-title text-center">Sign in</h1>
-
   <div class="login-content container">
-    <!-- Always show the illustration, no "d-none" classes -->
     <div class="login-illustration">
       <img src="assets/login-illustration.png" alt="Sign In Illustration" />
     </div>
-
     <div class="login-form">
-      <!-- placeholders in green, no separate label -->
       <div class="mb-3">
         <input
           class="form-control placeholder-green"
@@ -18,7 +13,6 @@
           [(ngModel)]="email"
         />
       </div>
-
       <div class="mb-3 position-relative">
         <input
           class="form-control placeholder-green"
@@ -34,7 +28,6 @@
           {{ showPassword ? "visibility_off" : "visibility" }}
         </span>
       </div>
-
       <div class="form-check mb-3">
         <input
           class="form-check-input"
@@ -46,29 +39,23 @@
           >Keep me logged in</label
         >
       </div>
-
       <div *ngIf="errorMessage" class="alert alert-danger mb-3">
         {{ errorMessage }}
       </div>
-
-      <button class="btn btn-primary w-100 mb-3" (click)="login()">
+      <button class="btn w-100 mb-3 login-btn" (click)="login()">
         Sign in
       </button>
-
       <div class="text-center mb-3">
         <span>
           Need an account?
           <a routerLink="/register" class="create-link">Create one</a>
         </span>
       </div>
-
-      <!-- Separator with "or" in center -->
       <div class="separator mb-3">
         <span>or</span>
       </div>
-
       <button
-        class="btn btn-google-auth w-100 mb-3 d-flex align-items-center justify-content-center"
+        class="btn btn-google-auth w-100 mb-3"
         (click)="googleLogin()"
       >
         <img

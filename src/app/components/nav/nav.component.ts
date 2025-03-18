@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { User } from '@angular/fire/auth';
+
 declare var bootstrap: any;
 
 @Component({
@@ -10,6 +11,7 @@ declare var bootstrap: any;
   standalone: true,
   imports: [CommonModule, RouterModule],
   templateUrl: './nav.component.html',
+  styleUrls: ['./nav.component.scss']
 })
 export class NavComponent implements OnInit {
   user: User | null = null;

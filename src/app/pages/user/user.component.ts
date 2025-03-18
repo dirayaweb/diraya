@@ -1,43 +1,54 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule, Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
-import { Router } from '@angular/router';
+import { User } from '@angular/fire/auth';
 import { FormsModule } from '@angular/forms';
+import { Firestore, collection, collectionData, orderBy, query } from '@angular/fire/firestore';
+import { Observable } from 'rxjs';
+
+interface ScanHistory {
+  barcode: string;
+  productName: string;
+  ingredients: string;
+  scanResult: string;
+  scanDate: any;
+}
 
 @Component({
   selector: 'app-user',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, RouterModule, FormsModule],
   templateUrl: './user.component.html',
+  styleUrls: ['./user.component.scss']
 })
 export class UserComponent implements OnInit {
   userAllergies: string[] | null = null;
   userName = '';
   userId = '';
-
-  // Full allergy list for user to choose from
   allAllergies = [
     'حليب - Milk',
     'بيض - Eggs',
     'جلوتين (قمح) - Gluten',
     'مكسرات - Nuts',
-    'صويا - Soy',
+    'صويا - Soy'
   ];
+  scanHistory$: Observable<ScanHistory[]> | null = null;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private firestore: Firestore
+  ) {}
 
   ngOnInit() {
     const current = this.authService.getCurrentUser();
     if (!current) {
-      // If no user, redirect or show error
       this.router.navigate(['/login']);
       return;
     }
-
     this.userId = current.uid;
     this.userName = current.displayName || current.email || '';
-
-    // Fetch user data (allergies)
     this.authService.getUserData(current.uid).subscribe((data) => {
       if (data?.allergies) {
         this.userAllergies = data.allergies;
@@ -45,6 +56,13 @@ export class UserComponent implements OnInit {
         this.userAllergies = [];
       }
     });
+    this.loadScanHistory();
+  }
+
+  loadScanHistory() {
+    const scansRef = collection(this.firestore, 'users/' + this.userId + '/scans');
+    const q = query(scansRef, orderBy('scanDate', 'desc'));
+    this.scanHistory$ = collectionData(q, { idField: 'id' }) as Observable<ScanHistory[]>;
   }
 
   logout() {
@@ -54,15 +72,9 @@ export class UserComponent implements OnInit {
   }
 
   updateAllergies() {
-    if (!this.userId || !this.userAllergies) return;
-    this.authService.saveAllergies(this.userId, this.userAllergies).subscribe({
-      next: () => {
-        // Possibly show a success message
-      },
-      error: (err) => {
-        // show error
-        console.error('Error saving allergies:', err);
-      },
-    });
+    if (!this.userId || !this.userAllergies) {
+      return;
+    }
+    this.authService.saveAllergies(this.userId, this.userAllergies).subscribe();
   }
 }
