@@ -36,6 +36,22 @@
   margin-bottom: 30px;
 }
 
+.camera-picker {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+.camera-picker label {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
+.camera-picker select {
+  padding: 5px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+}
+
 .start-scan-btn {
   background-color: rgba(23, 85, 93, 1);
   color: #fff;
@@ -43,6 +59,10 @@
   border-radius: 5px;
   padding: 10px 30px;
   font-weight: 600;
+}
+
+.camera-preview {
+  margin-bottom: 10px;
 }
 
 .result-container {

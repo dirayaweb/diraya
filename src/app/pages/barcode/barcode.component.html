@@ -5,24 +5,43 @@
 
   <div class="barcode-body">
     <div class="scanner-box">
-      <div class="camera-preview" *ngIf="isCameraActive">
-        <zxing-scanner
-          [device]="selectedDevice"
-          [formats]="allowedFormats"
-          [tryHarder]="true"
-          (camerasFound)="onCamerasFound($event)"
-          (scanSuccess)="onScanSuccess($event)"
-          (scanFailure)="onScanFailure($event)"
-          style="display: block; margin: 0 auto; width: 100%; max-width: 350px"
+      <div *ngIf="isCameraActive">
+        <div
+          class="camera-picker"
+          *ngIf="availableDevices && availableDevices.length > 1"
         >
-        </zxing-scanner>
+          <label for="cameraSelect">Select Camera:</label>
+          <select id="cameraSelect" (change)="onCameraSelected($event)">
+            <option
+              *ngFor="let device of availableDevices"
+              [value]="device.deviceId"
+              [selected]="device.deviceId === selectedDevice?.deviceId"
+            >
+              {{ device.label ? device.label : "Camera " + device.deviceId }}
+            </option>
+          </select>
+        </div>
+        <div class="camera-preview">
+          <zxing-scanner
+            [device]="selectedDevice"
+            [formats]="allowedFormats"
+            [tryHarder]="true"
+            [videoConstraints]="videoConstraints"
+            (camerasFound)="onCamerasFound($event)"
+            (scanSuccess)="onScanSuccess($event)"
+            (scanFailure)="onScanFailure($event)"
+            style="
+              display: block;
+              margin: 0 auto;
+              width: 100%;
+              max-width: 350px;
+            "
+          >
+          </zxing-scanner>
+        </div>
       </div>
-      <div class="scanner-btns text-center">
-        <button
-          class="btn start-scan-btn"
-          (click)="startCamera()"
-          [disabled]="isCameraActive"
-        >
+      <div class="scanner-btns text-center" *ngIf="!isCameraActive">
+        <button class="btn start-scan-btn" (click)="startCamera()">
           Scan Now
         </button>
       </div>

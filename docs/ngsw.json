@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1742332064770,
+  "timestamp": 1742348990302,
   "index": "/diraya/index.html",
   "assetGroups": [
     {
@@ -12,7 +12,7 @@
       },
       "urls": [
         "/diraya/index.html",
-        "/diraya/main-MSABTJQ5.js",
+        "/diraya/main-D74G674Z.js",
         "/diraya/polyfills-FFHMD2TL.js",
         "/diraya/styles-JKTMI7HX.css"
       ],
@@ -56,8 +56,8 @@
     "/diraya/assets/shape-right.png": "f20c67d23b4e64476c0da386ff2b1ef272507502",
     "/diraya/assets/shop-icon.png": "0c507096236eef65691db3a0fa9213caf7ad2820",
     "/diraya/assets/unsafe.png": "e5e25f20af57a7d0fa577d3754f25fd5c2104979",
-    "/diraya/index.html": "1c9d9cebb8fcd1b168e83580520c4e3624cad658",
-    "/diraya/main-MSABTJQ5.js": "3da3061f056e694c43ec4c8696555a22f30e9a21",
+    "/diraya/index.html": "a7874e4884a214022cb41ea90b8af7a59a5bc21a",
+    "/diraya/main-D74G674Z.js": "8912a5c617be6bf3ec400012650c50d30a9d6f54",
     "/diraya/polyfills-FFHMD2TL.js": "f49b49a155bc7d192db62a4c15d0a612b460a667",
     "/diraya/styles-JKTMI7HX.css": "efbfc59c3b58dd318283ea536f80049f65e8b8b5"
   },

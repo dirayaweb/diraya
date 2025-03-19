@@ -40,8 +40,9 @@ export class BarcodeComponent {
   ingredientsText: string | null = null;
   allergens: string[] = [];
 
-  // Video constraints to help mobile camera focus
-  videoConstraints = {
+  // Video constraints to help mobile camera focus.
+  // Cast as any to bypass type errors with the 'advanced' property.
+  videoConstraints: any = {
     facingMode: { exact: 'environment' },
     advanced: [{ focusMode: 'continuous' }],
   };
@@ -82,14 +83,22 @@ export class BarcodeComponent {
   onCamerasFound(devices: MediaDeviceInfo[]): void {
     this.availableDevices = devices;
     if (devices && devices.length) {
-      this.selectedDevice = devices[0];
+      // Set the default selected device if not already set
+      if (!this.selectedDevice) {
+        this.selectedDevice = devices[0];
+      }
     } else {
       this.errorMsg = 'No cameras found.';
     }
   }
 
-  onDeviceSelect(event: Event): void {
-    // Implement device selection if needed
+  onCameraSelected(event: Event): void {
+    const selectElement = event.target as HTMLSelectElement;
+    const deviceId = selectElement.value;
+    const device = this.availableDevices.find((d) => d.deviceId === deviceId);
+    if (device) {
+      this.selectedDevice = device;
+    }
   }
 
   fetchProductData(barcode: string): void {
