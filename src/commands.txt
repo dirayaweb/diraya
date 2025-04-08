@@ -1,0 +1,13 @@
+npm install -g @angular/cli
+git clone https://github.com/dirayaweb/diraya.git
+
+npm install
+ng serve
+
+ng build --configuration=production --base-href /diraya/   
+ng build --base-href /diraya/
+
+
+git add .
+git commit -m "build"
+git push origin main
